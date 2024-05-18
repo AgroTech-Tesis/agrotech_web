@@ -1,1 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'poppins', sans-serif;
+}
+
+html,
+body {
+    @apply leading-[normal] m-0;
+    height: 100%;
+}
+
+*,
+::before,
+::after {
+    border-width: 0;
+}

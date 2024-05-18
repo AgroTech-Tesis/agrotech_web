@@ -1,0 +1,19 @@
+<div class="login-container">
+  <div class="login-box p-shadow-10">
+    <div class="logo-image"></div>
+    <h2 class="login-header">Iniciar Sesión</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="p-fluid">
+        <div class="p-field">
+          <label for="username">Correo Electrónico</label>
+          <input type="text" formControlName="username" id="username" pInputText>
+        </div>
+        <div class="p-field">
+          <label for="password">Contraseña</label>
+          <input type="password" formControlName="password" id="password" pInputText>
+        </div>
+      </div>
+      <button [disabled]="loginForm.invalid" >Ingresar</button>
+    </form>
+  </div>
+</div>
