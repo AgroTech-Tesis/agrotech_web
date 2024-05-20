@@ -17,6 +17,7 @@ module.exports = {
         },
         cornflowerblue: "#77abfc",
         forestgreen: "#139f21",
+        forestred: "#F05C5C",
         salmon: {
           "100": "#f26c6c",
           "200": "rgba(240, 92, 92, 0.9)",
@@ -25,6 +26,20 @@ module.exports = {
         darkorange: "#ff7a00",
         cold: "#00b3ff",
         seagreen: "#297739",
+        fontblue: '#E7ECEF',
+        fontwhate: '#F8F8FB',
+        fontbluebold: '#879CB3',
+        fonttextgreen: '#297739',
+        texttile: '#274C77',
+        textparrafo: '#516F91',
+        textligth: '#879CB3',
+      },
+      backgroundImage: {
+        logo: "url('../assets/logo.png')",
+        graphic: "url('../assets/graphic1.png')",
+        graphic2: "url('../assets/graphic2.png')",
+        climate: "url('../assets/climate.png')",
+        graphic3: "url('../assets/graphic3.png')",
       },
       spacing: {},
       fontFamily: {
