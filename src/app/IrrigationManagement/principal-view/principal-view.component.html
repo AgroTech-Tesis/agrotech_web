@@ -19,15 +19,16 @@
       </div>
     </div>
   </div>
+
   <div class="w-full h-dvh grid grid-cols-4 gap-10">
     <div class="col-span-1">
-      <button class="my-4 h-12 w-80 cursor-pointer rounded-r-lg text-primary  bg-seagreen flex gap-6 items-center justify-start" >
+      <button  class="my-4 h-12 w-80 cursor-pointer rounded-r-lg text-primary  bg-seagreen flex gap-6 items-center justify-start" >
         <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home" class="ml-12"></mat-icon>
-        <p style="font-size: 16px; font-weight: 700; margin: 0;">Panel de control</p>
+        <a [routerLink]="'/inicio'" style="font-size: 16px; font-weight: 700; margin: 0;">Panel de control</a>
       </button>
-      <button class="bg-primary my-4 h-12 w-80 cursor-pointer hover:bg-seagreen hover:text-white rounded-r-lg text-seagreen  flex gap-6 items-center justify-start" >
+      <button  class="bg-primary my-4 h-12 w-80 cursor-pointer hover:bg-seagreen hover:text-white rounded-r-lg text-seagreen  flex gap-6 items-center justify-start" >
         <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="phone_iphone" class="ml-12"></mat-icon>
-        <p style="font-size: 16px; font-weight: 700; margin: 0;">Dispositivos</p>
+        <a  [routerLink]="'/dispositivos'" style="font-size: 16px; font-weight: 700; margin: 0;">Dispositivos</a>
       </button>
       <button class="bg-primary my-4 h-12 w-80 cursor-pointer hover:bg-seagreen hover:text-white rounded-r-lg text-seagreen  flex gap-6 items-center justify-start" >
         <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="bar_chart" class="ml-12"></mat-icon>

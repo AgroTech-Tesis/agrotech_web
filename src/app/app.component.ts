@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {RouterLink, RouterOutlet} from '@angular/router';
 import { SignInComponent } from './IdentityAndAccessManagement/sign-in/sign-in.component';
 import { PrincipalViewComponent } from './IrrigationManagement/principal-view/principal-view.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -12,12 +12,13 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { DevicesViewComponent } from './IrrigationManagement/devices-view/devices-view.component';
 import { PlostViewComponent } from './IrrigationManagement/plost-view/plost-view.component';
 import { ConfigurationViewComponent } from './IrrigationManagement/configuration-view/configuration-view.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet,
-    RouterOutlet,
+    RouterLink,
     SignInComponent,
     PrincipalViewComponent,
     MatSlideToggleModule,
@@ -29,7 +30,9 @@ import { ConfigurationViewComponent } from './IrrigationManagement/configuration
     ReactiveFormsModule,
     DevicesViewComponent,
     PlostViewComponent,
-    ConfigurationViewComponent],
+    ConfigurationViewComponent,
+    HttpClientModule,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

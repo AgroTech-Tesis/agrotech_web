@@ -1,0 +1,132 @@
+{
+  "riceCrops": [
+    {
+      "riceCropId": 1,
+      "name": "Cultivo Tumbes 1",
+      "zones": [
+        {
+          "zoneId": 1,
+          "name": "Parcela 1",
+          "createdAt": "21/05/24",
+          "updatedAt": "21/05/24",
+          "waterAmount": 2000
+        }
+      ],
+      "irrigation": [
+        {
+          "irrigationId": 1,
+          "createdAt": "21/05/24",
+          "updatedAt": "21/05/24",
+          "endedAt": "21/05/24",
+          "waterAmount": 5000,
+          "irrigationNumber": 2,
+          "daysPreviousIrrigation": 10
+        }
+      ]
+    }
+  ],
+  "devices": [
+    {
+      "deviceId": 1,
+      "deviceName": "Esp32 1",
+      "deviceModel": "Espressif Esp32 30 pines",
+      "createdAt": "21/05/24",
+      "updatedAt": "21/05/24",
+      "isOn": true,
+      "media": "Transmitter",
+      "registeredDate": "20-04-2024 12:19:50",
+      "location": "Parcela 1",
+      "status": "conectado",
+      "sensors": [
+        {
+          "sensorId": 1,
+          "name": "temperature and humidity sensor",
+          "model": "DHT-11",
+          "valueReceived": "20° C",
+          "createdAt": "21/05/24",
+          "updatedAt": "21/05/24"
+        },
+        {
+          "sensorId": 2,
+          "name": "moisture sensor",
+          "model": "FC-28",
+          "valueReceived": "38",
+          "createdAt": "21/05/24",
+          "updatedAt": "21/05/24"
+        },
+        {
+          "sensorId": 3,
+          "name": "caudal sensor",
+          "model": "YF-SO1",
+          "valueReceived": "1000",
+          "createdAt": "21/05/24",
+          "updatedAt": "21/05/24"
+        }
+      ],
+      "actuators": []
+    },
+    {
+      "deviceId": 2,
+      "deviceName": "Esp32 2",
+      "deviceModel": "Espressif Esp32 30 pines",
+      "createdAt": "21/05/24",
+      "updatedAt": "21/05/24",
+      "isOn": true,
+      "media": "Transmitter",
+      "registeredDate": "20-04-2024 12:19:50",
+      "location": "Parcela 2",
+      "status": "desconectado",
+      "sensors": [
+        {
+          "sensorId": 1,
+          "name": "temperature and humidity sensor",
+          "model": "DHT-11",
+          "valueReceived": "20° C",
+          "createdAt": "21/05/24",
+          "updatedAt": "21/05/24"
+        },
+        {
+          "sensorId": 2,
+          "name": "moisture sensor",
+          "model": "FC-28",
+          "valueReceived": "38",
+          "createdAt": "21/05/24",
+          "updatedAt": "21/05/24"
+        },
+        {
+          "sensorId": 3,
+          "name": "caudal sensor",
+          "model": "YF-SO1",
+          "valueReceived": "1000",
+          "createdAt": "21/05/24",
+          "updatedAt": "21/05/24"
+        }
+      ],
+      "actuators": []
+    },
+    {
+      "deviceId": 3,
+      "deviceName": "Esp32 3",
+      "deviceModel": "Espressif Esp32 30 pines",
+      "createdAt": "21/05/24",
+      "updatedAt": "21/05/24",
+      "isOn": true,
+      "media": "Receptor",
+      "registeredDate": "20-04-2024 12:19:50",
+      "location": "Parcela General",
+      "status": "conectado",
+      "sensors": [],
+      "actuators": [
+        {
+          "actuatorId": 1,
+          "name": "Solenoid valve",
+          "model": "",
+          "valueReceived": "",
+          "isOn": false,
+          "createdAt": "21/05/24",
+          "updatedAt": "21/05/24"
+        }
+      ]
+    }
+  ]
+}
