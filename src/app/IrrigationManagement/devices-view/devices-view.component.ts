@@ -20,7 +20,7 @@ export class DevicesViewComponent {
   //   {ubication: "Parcela 3", name: 'Esp32-3', createDate: "20-04-2024 12:19:50", status: 'fail'},
   //   {ubication: "Parcela 4", name: 'Esp32-4', createDate: "20-04-2024 12:19:50", status: 'disconnected'},
   // ]
-  displayedColumns: string[] = ['name', 'ubication', 'createDate', 'status'];
+  displayedColumns: string[] = ['name', 'location', 'createDate', 'status'];
   constructor(private deviceService: DeviceService) {
       this.deviceData = {} as MatTableDataSource<Device>
   }

@@ -32,15 +32,15 @@
       </button>
       <button class="bg-primary my-4 h-12 w-80 cursor-pointer hover:bg-seagreen hover:text-white rounded-r-lg text-seagreen  flex gap-6 items-center justify-start" >
         <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="bar_chart" class="ml-12"></mat-icon>
-        <p style="font-size: 16px; font-weight: 700; margin: 0;">Gráficos</p>
+        <a [routerLink]="'/plantaciones'" style="font-size: 16px; font-weight: 700; margin: 0;">Gráficos</a>
       </button>
       <button class="bg-primary my-4 h-12 w-80 cursor-pointer hover:bg-seagreen hover:text-white rounded-r-lg text-seagreen  flex gap-6 items-center justify-start" >
         <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="description" class="ml-12"></mat-icon>
-        <p style="font-size: 16px; font-weight: 700; margin: 0;">Reportes</p>
+        <a [routerLink]="'/dispositivos'" style="font-size: 16px; font-weight: 700; margin: 0;">Reportes</a>
       </button>
       <button class="bg-primary my-4 h-12 w-80 cursor-pointer hover:bg-seagreen hover:text-white rounded-r-lg text-seagreen flex gap-6 items-center justify-start" >
         <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="settings" class="ml-12"></mat-icon>
-        <p style="font-size: 16px; font-weight: 700; margin: 0;">Configuracion</p>
+        <a [routerLink]="'/configuracion'" style="font-size: 16px; font-weight: 700; margin: 0;">Configuracion</a>
       </button>
     </div>
     <div class="col-span-3 flex justify-center ">

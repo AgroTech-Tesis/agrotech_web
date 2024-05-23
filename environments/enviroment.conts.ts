@@ -1,5 +1,5 @@
 export const HOST = {
-    local: 'http://localhost/'
+    local: 'http://localhost:8080'
 };
 
 export const hostSelected = {
