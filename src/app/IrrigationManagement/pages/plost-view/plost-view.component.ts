@@ -8,6 +8,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {FormGroup, FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {Color, NgxChartsModule, ScaleType} from "@swimlane/ngx-charts";
+import {multi} from "../../model/LineChartData";
 
 @Component({
   selector: 'plost-view',
@@ -19,7 +21,8 @@ import {FormGroup, FormControl, FormsModule, ReactiveFormsModule} from '@angular
     MatDatepickerModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule],
+    ReactiveFormsModule,
+    NgxChartsModule],
   templateUrl: './plost-view.component.html',
   styleUrl: './plost-view.component.css'
 })
@@ -38,4 +41,43 @@ export class PlostViewComponent {
     start: new FormControl<Date | null>(null),
     end: new FormControl<Date | null>(null),
   });
+
+  view: [number, number] = [500, 300];
+
+  // options
+  legend: boolean = true;
+  showLabels: boolean = true;
+  animations: boolean = true;
+  xAxis: boolean = true;
+  yAxis: boolean = true;
+  showYAxisLabel: boolean = true;
+  showXAxisLabel: boolean = true;
+  xAxisLabel: string = 'Año';
+  yAxisLabel: string = 'Consumo de Agua';
+  timeline: boolean = true;
+
+  colorScheme = {
+    name: 'myScheme',
+    selectable: true,
+    group: ScaleType.Ordinal,
+    domain: ['#f00', '#0f0', '#0ff'],
+  };
+
+  constructor() {
+    Object.assign(this, { multi });
+  }
+
+  onSelect(data: any): void {
+    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+  }
+
+  onActivate(data: any): void {
+    console.log('Activate', JSON.parse(JSON.stringify(data)));
+  }
+
+  onDeactivate(data: any): void {
+    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+  }
+
+  protected readonly multi = multi;
 }

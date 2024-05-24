@@ -37,19 +37,83 @@
   <div class="grid grid-cols-2 gap-6">
     <div>
       <h2 class="mb-4">Consumo de agua</h2>
-      <div class="h-60 bg-graphic3 bg-cover"></div>
+<!--      <div class="h-60 bg-graphic3 bg-cover"></div>-->
+      <ngx-charts-line-chart
+        [view]="view"
+        [scheme]="colorScheme"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxis]="xAxis"
+        [yAxis]="yAxis"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [timeline]="timeline"
+        [results]="multi"
+        (select)="onSelect($event)"
+        (activate)="onActivate($event)"
+        (deactivate)="onDeactivate($event)"
+      >
+      </ngx-charts-line-chart>
     </div>
     <div>
       <h2 class="mb-4">Humedad del suelo</h2>
-      <div class="h-60 bg-graphic3 bg-cover"></div>
+<!--      <div class="h-60 bg-graphic3 bg-cover"></div>-->
+      <ngx-charts-line-chart
+        [view]="view"
+        [scheme]="colorScheme"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxis]="xAxis"
+        [yAxis]="yAxis"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [timeline]="timeline"
+        [results]="multi"
+        (select)="onSelect($event)"
+        (activate)="onActivate($event)"
+        (deactivate)="onDeactivate($event)"
+      >
+      </ngx-charts-line-chart>
     </div>
     <div>
       <h2 class="mb-4">Humedad relativa</h2>
-      <div class="h-60 bg-graphic3 bg-cover"></div>
+<!--      <div class="h-60 bg-graphic3 bg-cover"></div>-->
+      <ngx-charts-line-chart
+        [view]="view"
+        [scheme]="colorScheme"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxis]="xAxis"
+        [yAxis]="yAxis"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [timeline]="timeline"
+        [results]="multi"
+        (select)="onSelect($event)"
+        (activate)="onActivate($event)"
+        (deactivate)="onDeactivate($event)"
+      >
+      </ngx-charts-line-chart>
     </div>
     <div>
       <h2 class="mb-4">Temperatura del aire</h2>
-      <div class="h-60 bg-graphic3 bg-cover"></div>
+      <ngx-charts-line-chart
+        [view]="view"
+        [scheme]="colorScheme"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxis]="xAxis"
+        [yAxis]="yAxis"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [timeline]="timeline"
+        [results]="multi"
+        (select)="onSelect($event)"
+        (activate)="onActivate($event)"
+        (deactivate)="onDeactivate($event)"
+      >
+      </ngx-charts-line-chart>
+<!--      <div class="h-60 bg-graphic3 bg-cover"></div>-->
     </div>
   </div>
 </div>
