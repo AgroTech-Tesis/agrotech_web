@@ -1,10 +1,10 @@
 import { RouterModule, Routes } from '@angular/router';
-import { PrincipalViewComponent } from './IrrigationManagement/principal-view/principal-view.component';
-import { DevicesViewComponent } from './IrrigationManagement/devices-view/devices-view.component';
+import { PrincipalViewComponent } from './IrrigationManagement/pages/principal-view/principal-view.component';
+import { DevicesViewComponent } from './IrrigationManagement/pages/devices-view/devices-view.component';
 import { SignInComponent } from './IdentityAndAccessManagement/sign-in/sign-in.component';
-import { PlostViewComponent } from './IrrigationManagement/plost-view/plost-view.component';
+import { PlostViewComponent } from './IrrigationManagement/pages/plost-view/plost-view.component';
 import { NgModule } from '@angular/core';
-import {ConfigurationViewComponent} from "./IrrigationManagement/configuration-view/configuration-view.component";
+import {ConfigurationViewComponent} from "./IrrigationManagement/pages/configuration-view/configuration-view.component";
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },

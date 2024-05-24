@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
-import {DeviceService} from "../services/device.service";
-import {Device} from "../model/Device";
+import {DeviceService} from "../../services/device.service";
+import {Device} from "../../model/Device";
 import {HttpClientModule} from "@angular/common/http";
 
 @Component({

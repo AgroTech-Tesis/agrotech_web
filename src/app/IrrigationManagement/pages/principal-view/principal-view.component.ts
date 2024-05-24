@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgIf} from "@angular/common";
 import {MatIconModule} from '@angular/material/icon';
-import {WeatherForecastService} from "../services/weather-forecast.service";
+import {WeatherForecastService} from "../../services/weather-forecast.service";
 import {RouterLink, RouterOutlet} from "@angular/router";
 
 @Component({
@@ -16,7 +16,7 @@ import {RouterLink, RouterOutlet} from "@angular/router";
   templateUrl: './principal-view.component.html',
   styleUrl: './principal-view.component.css'
 })
-export class PrincipalViewComponent {
+export class PrincipalViewComponent implements OnInit{
   WeatherData: any;
   constructor(private weatherForecastService: WeatherForecastService) {
   }

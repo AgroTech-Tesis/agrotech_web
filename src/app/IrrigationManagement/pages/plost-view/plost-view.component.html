@@ -1,0 +1,55 @@
+<div class="p-10">
+  <mat-form-field class="w-full">
+    <mat-label>Lista de Parcelas</mat-label>
+    <mat-chip-grid #chipGrid aria-label="Enter fruits">
+      @for (fruit of fruits; track fruit) {
+        <mat-chip-row
+          [editable]="true"
+          [aria-description]="'press enter to edit ' + fruit.name">
+          {{fruit.name}}
+        </mat-chip-row>
+      }
+      <input placeholder="New fruit..."
+             [matChipInputFor]="chipGrid"
+             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+             [matChipInputAddOnBlur]="addOnBlur"/>
+    </mat-chip-grid>
+  </mat-form-field>
+
+  <mat-form-field class="w-full mb-6">
+    <mat-label>Enter a date range</mat-label>
+    <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+      <input matStartDate formControlName="start" placeholder="Start date">
+      <input matEndDate formControlName="end" placeholder="End date">
+    </mat-date-range-input>
+    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+
+    @if (range.controls.start.hasError('matStartDateInvalid')) {
+      <mat-error>Invalid start date</mat-error>
+    }
+    @if (range.controls.end.hasError('matEndDateInvalid')) {
+      <mat-error>Invalid end date</mat-error>
+    }
+  </mat-form-field>
+
+  <div class="grid grid-cols-2 gap-6">
+    <div>
+      <h2 class="mb-4">Consumo de agua</h2>
+      <div class="h-60 bg-graphic3 bg-cover"></div>
+    </div>
+    <div>
+      <h2 class="mb-4">Humedad del suelo</h2>
+      <div class="h-60 bg-graphic3 bg-cover"></div>
+    </div>
+    <div>
+      <h2 class="mb-4">Humedad relativa</h2>
+      <div class="h-60 bg-graphic3 bg-cover"></div>
+    </div>
+    <div>
+      <h2 class="mb-4">Temperatura del aire</h2>
+      <div class="h-60 bg-graphic3 bg-cover"></div>
+    </div>
+  </div>
+</div>

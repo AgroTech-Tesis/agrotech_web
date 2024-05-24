@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {RouterLink, RouterOutlet} from '@angular/router';
 import { SignInComponent } from './IdentityAndAccessManagement/sign-in/sign-in.component';
-import { PrincipalViewComponent } from './IrrigationManagement/principal-view/principal-view.component';
+import { PrincipalViewComponent } from './IrrigationManagement/pages/principal-view/principal-view.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,10 +9,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { DevicesViewComponent } from './IrrigationManagement/devices-view/devices-view.component';
-import { PlostViewComponent } from './IrrigationManagement/plost-view/plost-view.component';
-import { ConfigurationViewComponent } from './IrrigationManagement/configuration-view/configuration-view.component';
+import { DevicesViewComponent } from './IrrigationManagement/pages/devices-view/devices-view.component';
+import { PlostViewComponent } from './IrrigationManagement/pages/plost-view/plost-view.component';
+import { ConfigurationViewComponent } from './IrrigationManagement/pages/configuration-view/configuration-view.component';
 import {HttpClientModule} from "@angular/common/http";
+import {NavbarComponent} from "./components/navbar/navbar.component";
+import {SidebarComponent} from "./components/sidebar/sidebar.component";
 
 @Component({
   selector: 'app-root',
@@ -31,7 +33,7 @@ import {HttpClientModule} from "@angular/common/http";
     DevicesViewComponent,
     PlostViewComponent,
     ConfigurationViewComponent,
-    HttpClientModule,
+    HttpClientModule, NavbarComponent, SidebarComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
