@@ -1,30 +1,60 @@
 <div class="p-10">
-    <div class="col-span-3 flex justify-center">
-        <table mat-table [dataSource]="deviceData.data" class="mat-elevation-z8">
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef>Nombre</th>
-            <td mat-cell *matCellDef="let element"> {{element.deviceName}} </td>
-          </ng-container>
-          <ng-container matColumnDef="location">
-            <th mat-header-cell *matHeaderCellDef>Medio de comunicación</th>
-            <td mat-cell *matCellDef="let element"> {{element.media}} </td>
-          </ng-container>
-          <ng-container matColumnDef="createDate">
-            <th mat-header-cell *matHeaderCellDef>Fecha de Registro</th>
-            <td mat-cell *matCellDef="let element"> {{element.createdAt}} </td>
-          </ng-container>
-          <ng-container matColumnDef="status">
-            <th mat-header-cell *matHeaderCellDef>Estado</th>
-            <td mat-cell *matCellDef="let element" class="w-[200px]">
-              <div
-                [className]="'m-auto ' + 'w-[150px] ' + 'rounded-2xl ' + 'p-1 ' + 'text-white ' + 'text-center ' + (element.status === 'connected' ? 'bg-forestgreen': element.status === 'fail' ? 'bg-forestred' : 'bg-gray-100')">
-                {{element.status}}
-              </div>
-            </td>
-          </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+  <div class="justify-center w-full">
+    <div class="example-action-buttons">
+      <button mat-button (click)="accordion && accordion.openAll()">Expand All</button>
+      <button mat-button (click)="accordion && accordion.closeAll()">Collapse All</button>
     </div>
+    <mat-accordion class="w-full">
+      <!-- Encabezados de la tabla -->
+      <mat-expansion-panel expanded="false" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div class="grid grid-cols-4 w-full">
+              <div class="font-bold">{{displayedColumns[0]}}</div>
+              <div class="font-bold">{{displayedColumns[1]}}</div>
+              <div class="font-bold">{{displayedColumns[2]}}</div>
+              <div class="font-bold">{{displayedColumns[3]}}</div>
+            </div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+      </mat-expansion-panel>
+
+      <!-- Filas de datos -->
+      <mat-expansion-panel *ngFor="let element of deviceData.data">
+        <mat-expansion-panel-header>
+          <mat-panel-title class="w-full">
+            <div class="grid grid-cols-4 w-full">
+              <div>{{element.deviceName}}</div>
+              <div>{{element.media}}</div>
+              <div>{{this.formatDateTime(element.createdAt)}}</div>
+              <div class="w-[200px]">
+                <div [className]="'w-[110px] rounded-2xl p-1 text-white text-center ' + (element.status === 'connected' ? 'bg-forestgreen': element.status === 'fail' ? 'bg-forestred' : 'bg-gray-100')">
+                  {{element.status}}
+                </div>
+              </div>
+            </div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-divider></mat-divider>
+        <div class="p-4">
+          <!-- Datos de los sensores o actuadores -->
+          <div *ngIf="element.media === 'transmissor'">
+            <p>Sensores:</p>
+            <ul>
+              <li>Caudal</li>
+              <li>Temperatura</li>
+              <li>Humedad ambiente</li>
+              <li>Humedad del suelo</li>
+            </ul>
+          </div>
+          <div *ngIf="element.media === 'receptor'">
+            <p>Actuadores:</p>
+            <ul>
+              <li>Electrovalvula</li>
+            </ul>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
 </div>
