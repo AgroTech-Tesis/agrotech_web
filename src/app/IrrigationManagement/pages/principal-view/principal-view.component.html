@@ -166,26 +166,25 @@
                 <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="navigate_next"></mat-icon>
               </button>
             </div>
-            <div class="flex justify-center">
-              <div class="w-1/2">
-                <div class="w-[100px] h-[95px] bg-graphic2 bg-cover mt-5"></div>
-              </div>
-              <div class="w-1/2">
-                <div class="font-medium flex items-end">
-                  Conectados
-                </div>
-                <div class="relative font-medium flex items-end shrink-0">
-                  Con fallas
-                </div>
-                <div class="relative font-medium flex items-end h-3.5 shrink-0">
-                  Desconectados
-                </div>
-              </div>
-            </div>
+<!--                <div class="w-[100px] h-[95px] bg-graphic2 bg-cover mt-5"></div>-->
+                <ngx-charts-pie-chart
+                  [view]="view1"
+                  [scheme]="colorScheme1"
+                  [results]="single1"
+                  [gradient]="gradient1"
+                  [labels]="showLabels1"
+                  [doughnut]="isDoughnut1"
+                  (select)="onSelect1($event)"
+                  (activate)="onActivate1($event)"
+                  (deactivate)="onDeactivate1($event)"
+                >
+                </ngx-charts-pie-chart>
           </div>
         </div>
       </div>
     </div>
+
+
     <div class="flex justify-center">
       <div class="w-4/5">
         <div class="bg-white rounded-2xl">

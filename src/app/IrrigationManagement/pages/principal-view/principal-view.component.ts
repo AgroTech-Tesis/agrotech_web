@@ -5,7 +5,7 @@ import {WeatherForecastService} from "../../services/weather-forecast.service";
 import {RouterLink, RouterOutlet} from "@angular/router";
 import {NgxChartsModule, ScaleType} from "@swimlane/ngx-charts";
 import {single} from "../../model/BarChartData";
-
+import {single1} from "../../model/PieChartData";
 @Component({
   selector: 'principal-view',
   standalone: true,
@@ -71,17 +71,18 @@ export class PrincipalViewComponent implements OnInit{
 
   // PIE CHART
 
-  view1: [number, number] = [300, 100];
+  view1: [number, number] = [300, 300];
 
   // options
   gradient1: boolean = true;
-  showLegend1: boolean = true;
   showLabels1: boolean = true;
   isDoughnut1: boolean = false;
-  legendPosition1: string = 'below';
 
   colorScheme1 = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    name: 'myScheme',
+    selectable: true,
+    group: ScaleType.Ordinal,
+    domain: ['#f00', '#0f0', '#0ff', '#0ff', '#0ff', '#0ff'],
   };
 
 
@@ -96,4 +97,6 @@ export class PrincipalViewComponent implements OnInit{
   onDeactivate1(data: any): void {
     console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
+
+  protected readonly single1 = single1;
 }
