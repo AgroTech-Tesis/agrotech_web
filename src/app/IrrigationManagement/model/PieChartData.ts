@@ -1,18 +1,14 @@
 export var single1 = [
   {
-    "name": "Germany",
-    "value": 8940000
+    "name": "Con fallas",
+    "value": 1
   },
   {
-    "name": "USA",
-    "value": 5000000
+    "name": "Desconectados",
+    "value": 1
   },
   {
-    "name": "France",
-    "value": 7200000
-  },
-  {
-    "name": "UK",
-    "value": 6200000
+    "name": "Conectados",
+    "value": 2
   }
 ];
