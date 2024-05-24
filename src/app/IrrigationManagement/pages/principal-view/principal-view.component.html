@@ -1,6 +1,6 @@
 <div class="p-10">
   <div class="grid grid-cols-3 gap-4">
-    <div class="">
+    <div>
       <div class="shadow-lg my-8 w-full flex justify-center bg-white rounded-xl">
         <div class="py-8 mx-4 w-3/4 flex">
           <div class="">
@@ -43,7 +43,21 @@
             <div class="w-1/2 text-center pr-1 pt-1 pb-1 rounded-lg bg-fontbluebold"><p style="margin: 0;">Semana</p></div>
             <div class="w-1/2 text-center pl-1 pt-1 pb-1 rounded-lg"><p style="margin: 0;">Día</p></div>
           </div>
-          <div class="bg-graphic bg-cover h-6 mt-5"></div>
+<!--          <div class="bg-graphic bg-cover h-6 mt-5"></div>-->
+          <ngx-charts-bar-vertical
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="single"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [legend]="showLegend"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel"
+            (select)="onSelect($event)">
+          </ngx-charts-bar-vertical>
         </div>
       </div>
       <div class="shadow-lg w-full flex justify-center my-8 bg-white rounded-xl">
@@ -60,7 +74,21 @@
             <div class="w-1/2 text-center pr-1 pt-1 pb-1 rounded-lg bg-fontbluebold"><p style="margin: 0;">Semana</p></div>
             <div class="w-1/2 text-center pl-1 pt-1 pb-1 rounded-lg"><p style="margin: 0;">Día</p></div>
           </div>
-          <div class="bg-graphic bg-cover w-full h-6 mt-5"></div>
+<!--          <div class="bg-graphic bg-cover w-full h-6 mt-5"></div>-->
+          <ngx-charts-bar-vertical
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="single"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [legend]="showLegend"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel"
+            (select)="onSelect($event)">
+          </ngx-charts-bar-vertical>
         </div>
       </div>
     </div>
@@ -80,7 +108,21 @@
               <div class="w-1/2 text-center pr-1 pt-1 pb-1 rounded-lg bg-fontbluebold"><p style="margin: 0;">Semana</p></div>
               <div class="w-1/2 text-center pl-1 pt-1 pb-1 rounded-lg"><p style="margin: 0;">Día</p></div>
             </div>
-            <div class="bg-graphic bg-cover h-6 mt-5"></div>
+<!--            <div class="bg-graphic bg-cover h-6 mt-5"></div>-->
+            <ngx-charts-bar-vertical
+              [view]="view"
+              [scheme]="colorScheme"
+              [results]="single"
+              [gradient]="gradient"
+              [xAxis]="showXAxis"
+              [yAxis]="showYAxis"
+              [legend]="showLegend"
+              [showXAxisLabel]="showXAxisLabel"
+              [showYAxisLabel]="showYAxisLabel"
+              [xAxisLabel]="xAxisLabel"
+              [yAxisLabel]="yAxisLabel"
+              (select)="onSelect($event)">
+            </ngx-charts-bar-vertical>
           </div>
         </div>
         <div class="shadow-lg w-full flex justify-center my-8 bg-white rounded-xl">
@@ -97,7 +139,21 @@
               <div class="w-1/2 text-center pr-1 pt-1 pb-1 rounded-lg bg-fontbluebold"><p style="margin: 0;">Semana</p></div>
               <div class="w-1/2 text-center pl-1 pt-1 pb-1 rounded-lg"><p style="margin: 0;">Día</p></div>
             </div>
-            <div class="bg-graphic bg-cover w-full h-6 mt-5"></div>
+<!--            <div class="bg-graphic bg-cover w-full h-6 mt-5"></div>-->
+            <ngx-charts-bar-vertical
+              [view]="view"
+              [scheme]="colorScheme"
+              [results]="single"
+              [gradient]="gradient"
+              [xAxis]="showXAxis"
+              [yAxis]="showYAxis"
+              [legend]="showLegend"
+              [showXAxisLabel]="showXAxisLabel"
+              [showYAxisLabel]="showYAxisLabel"
+              [xAxisLabel]="xAxisLabel"
+              [yAxisLabel]="yAxisLabel"
+              (select)="onSelect($event)">
+            </ngx-charts-bar-vertical>
           </div>
         </div>
         <div class="shadow-lg w-full flex justify-center my-8 bg-white rounded-xl">
