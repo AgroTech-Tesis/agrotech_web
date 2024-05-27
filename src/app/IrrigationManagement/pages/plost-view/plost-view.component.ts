@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -10,6 +10,7 @@ import {provideNativeDateAdapter} from '@angular/material/core';
 import {FormGroup, FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Color, NgxChartsModule, ScaleType} from "@swimlane/ngx-charts";
 import {multi} from "../../model/LineChartData";
+import {ArduinoIotService} from "../../services/arduino-iot";
 
 @Component({
   selector: 'plost-view',
@@ -26,7 +27,7 @@ import {multi} from "../../model/LineChartData";
   templateUrl: './plost-view.component.html',
   styleUrl: './plost-view.component.css'
 })
-export class PlostViewComponent {
+export class PlostViewComponent implements OnInit{
 
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   fruits: any[] = [
@@ -63,8 +64,38 @@ export class PlostViewComponent {
     domain: ['#f00', '#0f0', '#0ff'],
   };
 
-  constructor() {
+  //token para el arduino iot cloud
+  token: string | null = null;
+  errorMessage: string | null = null;
+
+  // get Dashboards
+  dashboardsValues = {};
+  constructor(private arduinoIotService: ArduinoIotService) {
     Object.assign(this, { multi });
+  }
+
+  ngOnInit() {
+    this.arduinoIotService.getToken().subscribe(
+      token => {
+        console.log("token", token);
+        this.arduinoIotService.getDashboards(token).subscribe(
+          dashboards => {
+            this.dashboardsValues = dashboards[0].widgets.map((widget: any) => ({
+              last_value: widget.variables[0].last_value,
+              last_value_updated_at: widget.variables[0].last_value_updated_at,
+              variable_name: widget.variables[0].variable_name
+            }));
+            console.log(this.dashboardsValues);
+          },
+          error => {
+            console.error('Error retrieving dashboards:', error);
+          }
+        );
+      },
+      error => {
+        console.error('Error retrieving token:', error);
+      }
+    );
   }
 
   onSelect(data: any): void {

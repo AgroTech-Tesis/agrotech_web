@@ -1,0 +1,8 @@
+{
+  "/iot/**": {
+    "target": "https://api2.arduino.cc",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}
