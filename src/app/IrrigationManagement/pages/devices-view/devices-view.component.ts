@@ -33,7 +33,6 @@ export class DevicesViewComponent implements OnInit{
   }
   ngOnInit(): void {
     this.getAllDevices();
-
   }
 
   getAllDevices(){
@@ -48,7 +47,4 @@ export class DevicesViewComponent implements OnInit{
     const dateTime = new Date(dateTimeString);
     return dateTime.toLocaleString('es-ES');
   }
-
-
-
 }

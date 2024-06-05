@@ -1,0 +1,250 @@
+<div class="p-10">
+  <div class="grid grid-cols-3 gap-4">
+    <div>
+      <div class="shadow-lg my-8 w-full flex justify-center bg-white rounded-xl">
+        <div class="py-8 mx-4 w-3/4 flex">
+          <div class="">
+            <div class="font-extra bold text-secondary" style="font-size: 22px;">
+              Clima
+            </div>
+            <div class="text-sm-5 font-semibold text-textparrafo">
+              {{WeatherData.name}}
+            </div>
+            <b class="text-secondary flex items-center py-4" style="font-size: 30px;">{{WeatherData.temp_celcius}}° C</b>
+            <div class="flex">
+              <p class="font-light">{{WeatherData.temp_min}}° C</p>
+              <p class="font-light text-secondary-low">
+                /
+              </p>
+              <p class="font-light text-darkorange">
+                {{WeatherData.temp_max}}° C
+              </p>
+            </div>
+            <div class="font-light text-secondary-low">
+              {{ WeatherData.description }}
+            </div>
+          </div>
+          <div class="flex items-center">
+            <div class="w-[90px] h-[68px] bg-climate bg-cover mt-5"></div>
+          </div>
+        </div>
+      </div>
+      <div class="shadow-lg my-8 w-full flex justify-center bg-white rounded-xl">
+        <div class="py-8 mx-4 w-3/4">
+          <div class="overflow-hidden flex justify-end items-center text-base-2 text-secondary">
+            <div class="font-extrabold text-secondary" style="font-size: 17px;">
+              Humedad del suelo
+            </div>
+            <button mat-mini-fab [routerLink]="['/historical-data']" class="ml-9 bg-white hover:bg-fontwhate w-10 h-10 cursor-pointer rounded-full" aria-label="Example icon button with a filter list icon">
+              <mat-icon  aria-hidden="false" aria-label="Example home icon" fontIcon="navigate_next"></mat-icon>
+            </button>
+          </div>
+<!--          <div class="bg-fontblue text-textparrafo rounded-lg flex mt-2">-->
+<!--            <div class="w-1/2 text-center pr-1 pt-1 pb-1 rounded-lg bg-fontbluebold"><p style="margin: 0;">Semana</p></div>-->
+<!--            <div class="w-1/2 text-center pl-1 pt-1 pb-1 rounded-lg"><p style="margin: 0;">Día</p></div>-->
+<!--          </div>-->
+          <div *ngIf="moistureHasData">
+            <ngx-charts-bar-vertical
+              [view]="view"
+              [barPadding]="barPadding"
+              [scheme]="colorScheme"
+              [results]="moistureFilteredBy5LastHours"
+              [gradient]="gradient"
+              [xAxis]="showXAxis"
+              [yAxis]="showYAxis"
+              [legend]="showLegend"
+              [showXAxisLabel]="showXAxisLabel"
+              [showYAxisLabel]="showYAxisLabel"
+              [xAxisLabel]="xAxisLabel"
+              [yAxisLabel]="yAxisLabel"
+              (select)="onSelect($event)">
+            </ngx-charts-bar-vertical>
+          </div>
+          <div *ngIf="!moistureHasData">
+            <p>No hubo registro en las últimas 5 horas</p>
+          </div>
+        </div>
+      </div>
+      <div class="shadow-lg w-full flex justify-center my-8 bg-white rounded-xl">
+        <div class="py-8 mx-4 w-3/4">
+          <div class="overflow-hidden flex justify-end items-center text-base-2 text-secondary">
+            <div class="font-extrabold text-secondary" style="font-size: 17px;">
+              Temperatura ambiente
+            </div>
+            <button mat-mini-fab [routerLink]="['/historical-data']" class="ml-7 bg-white hover:bg-fontwhate w-10 h-10 cursor-pointer rounded-full" aria-label="Example icon button with a filter list icon">
+              <mat-icon  aria-hidden="false" aria-label="Example home icon" fontIcon="navigate_next"></mat-icon>
+            </button>
+          </div>
+<!--          <div class="bg-fontblue text-textparrafo rounded-lg flex mt-2">-->
+<!--            <div class="w-1/2 text-center pr-1 pt-1 pb-1 rounded-lg bg-fontbluebold"><p style="margin: 0;">Semana</p></div>-->
+<!--            <div class="w-1/2 text-center pl-1 pt-1 pb-1 rounded-lg"><p style="margin: 0;">Día</p></div>-->
+<!--          </div>-->
+          <div *ngIf="temperatureHasData">
+            <ngx-charts-bar-vertical
+              [view]="view"
+              [barPadding]="barPadding"
+              [scheme]="colorScheme"
+              [results]="temperatureFilteredBy5LastHours"
+              [gradient]="gradient"
+              [xAxis]="showXAxis"
+              [yAxis]="showYAxis"
+              [legend]="showLegend"
+              [showXAxisLabel]="showXAxisLabel"
+              [showYAxisLabel]="showYAxisLabel"
+              [xAxisLabel]="xAxisLabel"
+              [yAxisLabel]="yAxisLabel"
+              (select)="onSelect($event)">
+            </ngx-charts-bar-vertical>
+          </div>
+          <div *ngIf="!temperatureHasData">
+            <p>No hubo registro en las últimas 5 horas</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-center">
+      <div class="w-full">
+        <div class="shadow-lg my-8 w-full flex justify-center bg-white rounded-xl">
+          <div class="py-8 mx-4 w-3/4">
+            <div class="overflow-hidden flex justify-end items-center text-base-2 text-secondary">
+              <div class="font-extrabold text-secondary" style="font-size: 17px;">
+                Consumo del agua
+              </div>
+              <button mat-mini-fab class="ml-12 bg-white hover:bg-fontwhate w-10 h-10 cursor-pointer rounded-full" aria-label="Example icon button with a filter list icon">
+                <mat-icon [routerLink]="['/historical-data']" aria-hidden="false" aria-label="Example home icon" fontIcon="navigate_next"></mat-icon>
+              </button>
+            </div>
+<!--            <div class="bg-fontblue text-textparrafo rounded-lg flex mt-2">-->
+<!--              <div class="w-1/2 text-center pr-1 pt-1 pb-1 rounded-lg bg-fontbluebold"><p style="margin: 0;">Semana</p></div>-->
+<!--              <div class="w-1/2 text-center pl-1 pt-1 pb-1 rounded-lg"><p style="margin: 0;">Día</p></div>-->
+<!--            </div>-->
+            <div *ngIf="caudalHasData">
+              <ngx-charts-bar-vertical
+                [view]="view"
+                [barPadding]="barPadding"
+                [scheme]="colorScheme"
+                [results]="caudalFilteredBy5LastHours"
+                [gradient]="gradient"
+                [xAxis]="showXAxis"
+                [yAxis]="showYAxis"
+                [legend]="showLegend"
+                [showXAxisLabel]="showXAxisLabel"
+                [showYAxisLabel]="showYAxisLabel"
+                [xAxisLabel]="xAxisLabel"
+                [yAxisLabel]="yAxisLabel"
+                (select)="onSelect($event)">
+              </ngx-charts-bar-vertical>
+            </div>
+            <div *ngIf="!caudalHasData">
+              <p>No hubo registro en las últimas 5 horas</p>
+            </div>
+          </div>
+        </div>
+        <div class="shadow-lg w-full flex justify-center my-8 bg-white rounded-xl">
+          <div class="py-8 mx-4 w-3/4">
+            <div class="overflow-hidden flex justify-end items-center text-base-2 text-secondary">
+              <div class="font-extrabold text-secondary" style="font-size: 17px;">
+                Humedad Relativa
+              </div>
+              <button mat-mini-fab [routerLink]="['/historical-data']" class="ml-9 bg-white hover:bg-fontwhate w-10 h-10 cursor-pointer rounded-full" aria-label="Example icon button with a filter list icon">
+                <mat-icon  aria-hidden="false" aria-label="Example home icon" fontIcon="navigate_next"></mat-icon>
+              </button>
+            </div>
+<!--            <div class="bg-fontblue text-textparrafo rounded-lg flex mt-2">-->
+<!--              <div class="w-1/2 text-center pr-1 pt-1 pb-1 rounded-lg bg-fontbluebold"><p style="margin: 0;">Semana</p></div>-->
+<!--              <div class="w-1/2 text-center pl-1 pt-1 pb-1 rounded-lg"><p style="margin: 0;">Día</p></div>-->
+<!--            </div>-->
+            <div *ngIf="humidityHasData">
+              <ngx-charts-bar-vertical
+                [view]="view"
+                [barPadding]="barPadding"
+                [scheme]="colorScheme"
+                [results]="single"
+                [gradient]="gradient"
+                [xAxis]="showXAxis"
+                [yAxis]="showYAxis"
+                [legend]="showLegend"
+                [showXAxisLabel]="showXAxisLabel"
+                [showYAxisLabel]="showYAxisLabel"
+                [xAxisLabel]="xAxisLabel"
+                [yAxisLabel]="yAxisLabel"
+                (select)="onSelect($event)">
+              </ngx-charts-bar-vertical>
+            </div>
+            <div *ngIf="!humidityHasData">
+              <p>No hubo registro en las últimas 5 horas</p>
+            </div>
+          </div>
+        </div>
+        <div class="shadow-lg w-full flex justify-center my-8 bg-white rounded-xl">
+          <div class="py-8 mx-4 w-3/4">
+            <div class="overflow-hidden flex justify-end items-center text-base-2 text-secondary">
+              <div class="font-extrabold text-secondary" style="font-size: 17px;">
+                Dispositivos
+              </div>
+              <button mat-mini-fab [routerLink]="['/devices']" class="ml-9 bg-white hover:bg-fontwhate w-10 h-10 cursor-pointer rounded-full" aria-label="Example icon button with a filter list icon">
+                <mat-icon  aria-hidden="false" aria-label="Example home icon" fontIcon="navigate_next"></mat-icon>
+              </button>
+            </div>
+            <ngx-charts-pie-chart
+              [view]="view1"
+              [scheme]="colorScheme1"
+              [results]="single1"
+              [gradient]="gradient1"
+              [labels]="showLabels1"
+              [legend]="showLegend1"
+              [legendPosition]="legendPosition1"
+              [doughnut]="isDoughnut1"
+              (select)="onSelect1($event)"
+              (activate)="onActivate1($event)"
+              (deactivate)="onDeactivate1($event)">
+            </ngx-charts-pie-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="flex justify-center">
+      <div class="w-4/5">
+        <div class="bg-white rounded-2xl">
+          <div class="p-5">
+            <div class="overflow-hidden flex justify-end items-center text-base-2 text-secondary">
+              <div class="font-extrabold text-xl" style="font-size: 18px;">Notificaciones</div>
+              <button mat-mini-fab class="ml-12 bg-white hover:bg-fontwhate w-10 h-10 cursor-pointer rounded-full" aria-label="Example icon button with a filter list icon">
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="navigate_next"></mat-icon>
+              </button>
+            </div>
+            <div class="my-5">
+              <div class="my-2">
+                <div class="text-4xl font-medium text-textparrafo" style="font-size: 15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                  Se ha desactivado el riego
+                </div>
+                <div class="font-light text-textligth">
+                  Hace 5 minutos
+                </div>
+              </div>
+              <div class="my-2">
+                <div class="text-xl font-medium text-textparrafo" style="font-size: 15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                  Se ha activado el riego
+                </div>
+                <div class="font-light text-textligth">
+                  Hace 12 minutos
+                </div>
+              </div>
+              <div class="my-2">
+                <div class="text-xl font-medium text-textparrafo" style="font-size: 15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                  Se agregó un nuevo dispositivo
+                </div>
+                <div class="font-light text-textligth">
+                  Hace 16 minutos
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

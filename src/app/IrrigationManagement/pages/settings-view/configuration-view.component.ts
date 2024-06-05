@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'configuration-view',
+  selector: 'settings-view',
   standalone: true,
   imports: [],
   templateUrl: './configuration-view.component.html',

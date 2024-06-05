@@ -13,7 +13,7 @@ import {multi} from "../../model/LineChartData";
 import {ArduinoIotService} from "../../services/arduino-iot";
 
 @Component({
-  selector: 'plost-view',
+  selector: 'charts-view',
   standalone: true,
   providers: [provideNativeDateAdapter()],
   imports: [MatFormFieldModule,
