@@ -1,0 +1,9 @@
+mat-button-toggle-group {
+  display: flex;
+  margin: 20px 0;
+}
+
+mat-button-toggle {
+  margin: 0 10px;
+  color: black;
+}

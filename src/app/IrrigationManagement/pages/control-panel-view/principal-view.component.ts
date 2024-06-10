@@ -188,7 +188,7 @@ export class PrincipalViewComponent implements OnInit{
 
 
   getSensorDataRecord(){
-    this.sensorService.getSensorDataRecord().subscribe((dataRecords: any)=>{
+    this.sensorService.getSensorDataRecord(undefined, undefined, undefined).subscribe((dataRecords: any)=>{
       // Transformar dataRecords para cambiar 'lastValue' a 'value'
       let sensorData: any[] = dataRecords.map((record: any) => {
         let transformedRecord = {

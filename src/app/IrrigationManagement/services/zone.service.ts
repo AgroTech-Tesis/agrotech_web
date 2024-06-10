@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {catchError, Observable, retry, throwError} from "rxjs";
 import {Device} from "../model/Device";
 import {HOST} from "../../../../environments/enviroment.conts";
@@ -7,9 +7,9 @@ import {HOST} from "../../../../environments/enviroment.conts";
 @Injectable({
   providedIn: 'root'
 })
-export class SensorService {
+export class ZoneService {
   // basePath = `${HOST.local}/device`;
-  dataRecordPath =   `${HOST.local}/sensor-data-record/pagination`
+  dataRecordPath =   `${HOST.local}/zone`
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -30,23 +30,8 @@ export class SensorService {
   }
 
   // Get all data recorded by the sensors
-  getSensorDataRecord(startDate: any, endDate: any, zoneId: any): Observable<any>{
-    let params = new HttpParams();
-
-
-    // Agregar parámetros solo si están presentes
-    if (startDate){
-      params = params.set('startDate', startDate)
-    }
-    if (endDate) {
-      params = params.set('endDate', endDate);
-    }
-    if (zoneId) {
-      params = params.set('zoneId', zoneId);
-    }
-
-    console.log(params)
-    return this.http.get<any>(this.dataRecordPath, {params, ...this.httpOptions})
+  getZones(): Observable<any>{
+    return this.http.get<any>(this.dataRecordPath, this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
