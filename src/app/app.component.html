@@ -1,32 +1,14 @@
-<!--<div class="text-seagreen h-screen">-->
-<!--  <navbar class="w-full"></navbar>-->
-<!--  <div class="flex flex-row flex-wrap h-full">-->
-<!--    &lt;!&ndash; Estilos del sidebar &ndash;&gt;-->
-<!--    <div class="bg-gray-800 text-white w-64 flex-none">-->
-<!--      &lt;!&ndash; Contenido del sidebar &ndash;&gt;-->
-<!--      <sidebar></sidebar>-->
-<!--    </div>-->
-<!--    &lt;!&ndash; Estilos del router-outlet &ndash;&gt;-->
-<!--    <div class="flex-grow flex items-center justify-center bg-primary flex-1">-->
-<!--      &lt;!&ndash; Contenido del router-outlet &ndash;&gt;-->
-<!--      <router-outlet></router-outlet>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-
-<div class="text-seagreen h-screen flex flex-col">
+<div *ngIf="isLogin; else signInTemplate" class="text-seagreen h-screen flex flex-col">
   <navbar class="w-full"></navbar>
   <div class="flex flex-1">
-    <!-- Estilos del sidebar -->
     <div class="bg-gray-800 text-white flex flex-col items-center overflow-y-auto w-64 h-full">
-      <!-- Contenido del sidebar -->
       <sidebar></sidebar>
     </div>
-    <!-- Estilos del router-outlet -->
     <div class="bg-primary flex-1 h-full">
-      <!-- Contenido del router-outlet -->
       <router-outlet style="padding-left: 50px"></router-outlet>
     </div>
   </div>
 </div>
-
+<ng-template #signInTemplate>
+  <sign-in (isLogin)="onLogin($event)"></sign-in>
+</ng-template>

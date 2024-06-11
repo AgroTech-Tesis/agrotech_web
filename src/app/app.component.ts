@@ -15,6 +15,7 @@ import { ConfigurationViewComponent } from './IrrigationManagement/pages/setting
 import {HttpClientModule} from "@angular/common/http";
 import {NavbarComponent} from "./components/navbar/navbar.component";
 import {SidebarComponent} from "./components/sidebar/sidebar.component";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -29,6 +30,7 @@ import {SidebarComponent} from "./components/sidebar/sidebar.component";
     MatButtonModule,
     MatSidenavModule,
     MatFormFieldModule,
+    CommonModule,
     ReactiveFormsModule,
     DevicesViewComponent,
     PlostViewComponent,
@@ -41,7 +43,9 @@ import {SidebarComponent} from "./components/sidebar/sidebar.component";
 export class AppComponent {
   contactForm: FormGroup = new FormGroup({});
   showFiller = false;
-  constructor(private formBuilder: FormBuilder) {
+  isLogin = false;
+  constructor(private formBuilder: FormBuilder
+  ) {
     this.createContactForm();
   }
   createContactForm() {
@@ -59,5 +63,8 @@ export class AppComponent {
     } else {
       console.error('Form invalid');
     }
+  }
+  onLogin(isLogin: boolean) {
+    this.isLogin = isLogin;
   }
 }
