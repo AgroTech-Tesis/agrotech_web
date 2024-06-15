@@ -9,6 +9,9 @@ import {single} from "../../model/BarChartData";
 import {DeviceService} from "../../services/device.service";
 import {isEmpty, Subject} from "rxjs";
 import {SensorService} from "../../services/sensor.service";
+import {NotificationService} from "../../services/notification.service";
+import moment from 'moment';
+
 @Component({
   selector: 'control-panel-view',
   standalone: true,
@@ -26,6 +29,7 @@ export class PrincipalViewComponent implements OnInit{
 
   constructor(
     private weatherForecastService: WeatherForecastService,
+    private notificationService: NotificationService,
     private deviceService: DeviceService,
     private sensorService: SensorService) {
     // Object.assign(this, { single })
@@ -42,6 +46,7 @@ export class PrincipalViewComponent implements OnInit{
   caudalSensorData: any[] = []
   temperatureSensorData: any[] = []
   moistureSensorData: any[] = []
+  notificationList: any[] = []
   temperatureFilteredBy5LastHours: any = null;
   caudalFilteredBy5LastHours: any = null;
   humidityFilteredBy5LastHours: any = null;
@@ -64,15 +69,14 @@ export class PrincipalViewComponent implements OnInit{
       .catch(error => {
         console.error('Error fetching weather data', error);
       });
-
-    // Get device status
+    this.notificationService.getNotification().subscribe((data: any) => {
+      this.notificationList = data;
+    });
     this.getDevicesStatus();
     this.devicesStatusSubject.subscribe(status => {
       this.single1 = status;
     });
 
-
-    // Get data records from sensors
     this.getSensorDataRecord();
     this.dataRecordsSubject.subscribe(records =>{
       console.log("records", records)
@@ -94,7 +98,9 @@ export class PrincipalViewComponent implements OnInit{
 
   }
   // BAR CHART
-
+  formatDate(dateString: any) {
+    return moment(dateString).format('DD/MM/YYYY HH:mm:ss');
+  }
   isHourInTheMorning(time: string): Boolean {
     return time === 'AM';
   }
