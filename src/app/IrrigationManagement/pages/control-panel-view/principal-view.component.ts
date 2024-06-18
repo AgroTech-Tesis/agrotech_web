@@ -10,7 +10,6 @@ import {DeviceService} from "../../services/device.service";
 import {isEmpty, Subject} from "rxjs";
 import {SensorService} from "../../services/sensor.service";
 import {NotificationService} from "../../services/notification.service";
-import moment from 'moment';
 
 @Component({
   selector: 'control-panel-view',
@@ -104,7 +103,28 @@ export class PrincipalViewComponent implements OnInit{
   }
   // BAR CHART
   formatDate(dateString: any) {
-    return moment(dateString).format('DD/MM/YYYY HH:mm:ss');
+    // dependencia 'moment' muy pesado para ejecutar el npm run build, por eso se ha comentado y buscado otra solución
+    // console.log("dateString", dateString);
+    // console.log("moment", moment(dateString).format('DD/MM/YYYY HH:mm:ss'));
+    // return moment(dateString).format('DD/MM/YYYY HH:mm:ss');
+    console.log("dateString", dateString);
+
+    const date = new Date(dateString);
+
+    // Obteniendo los componentes de la fecha
+    const day = String(date.getUTCDate()).padStart(2, '0');
+    const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // Los meses empiezan desde 0
+    const year = date.getUTCFullYear();
+    const hours = String(date.getUTCHours()).padStart(2, '0');
+    const minutes = String(date.getUTCMinutes()).padStart(2, '0');
+    const seconds = String(date.getUTCSeconds()).padStart(2, '0');
+
+    // Formateando la fecha
+    const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+
+    console.log("formattedDate", formattedDate);
+
+    return formattedDate;
   }
   isHourInTheMorning(time: string): Boolean {
     return time === 'AM';
