@@ -19,7 +19,8 @@ export class WeatherForecastService {
       temp_celcius: (data.main.temp - 273.15).toFixed(0),
       temp_min: (data.main.temp_min - 273.15).toFixed(0),
       temp_max: (data.main.temp_max - 273.15).toFixed(0),
-      description: this.getDescription(data.weather[0].description)
+      // description: this.getDescription(data.weather[0].description)
+      description: data.weather[0].description,
     };
   }
 

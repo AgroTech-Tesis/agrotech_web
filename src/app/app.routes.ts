@@ -7,7 +7,8 @@ import { NgModule } from '@angular/core';
 import {ConfigurationViewComponent} from "./IrrigationManagement/pages/settings-view/configuration-view.component";
 
 export const routes: Routes = [
-  { path: 'control-panel', component: PrincipalViewComponent },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: 'dashboard', component: PrincipalViewComponent },
   { path: 'devices', component: DevicesViewComponent },
   { path: 'historical-data', component: PlostViewComponent },
   { path: 'sign-in', component: SignInComponent },

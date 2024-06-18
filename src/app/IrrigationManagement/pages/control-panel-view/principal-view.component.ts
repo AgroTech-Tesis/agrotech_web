@@ -46,6 +46,7 @@ export class PrincipalViewComponent implements OnInit{
   caudalSensorData: any[] = []
   temperatureSensorData: any[] = []
   moistureSensorData: any[] = []
+  humiditySensorData: any[] = []
   notificationList: any[] = []
   temperatureFilteredBy5LastHours: any = null;
   caudalFilteredBy5LastHours: any = null;
@@ -54,6 +55,7 @@ export class PrincipalViewComponent implements OnInit{
   private readonly TEMPERATURE_SENSOR: string = "SENSOR DE TEMPERATURA";
   private readonly CAUDAL_SENSOR: string = "SENSOR DE CAUDAL";
   private readonly MOISTURE_SENSOR: string = "SENSOR DE HUMEDAD";
+  private readonly HUMIDITY_SENSOR: string = "SENSOR DE HUMEDAD DEL AIRE";
   temperatureHasData: Boolean = true;
   caudalHasData: Boolean = true;
   moistureHasData: Boolean = true;
@@ -83,16 +85,19 @@ export class PrincipalViewComponent implements OnInit{
       this.caudalSensorData = records.filter((caudal:any)=> caudal.typeSensor === this.CAUDAL_SENSOR)
       this.temperatureSensorData = records.filter((temperature:any)=> temperature.typeSensor === this.TEMPERATURE_SENSOR)
       this.moistureSensorData = records.filter((moisture:any)=> moisture.typeSensor === this.MOISTURE_SENSOR)
+      this.humiditySensorData = records.filter((moisture:any)=> moisture.typeSensor === this.HUMIDITY_SENSOR)
       // this.single is an arrays that contains the average of the values in the last 5 hours
       this.temperatureFilteredBy5LastHours = this.getDataRecordsAverageInTheLast5Hours(this.temperatureSensorData, this.TEMPERATURE_SENSOR)
       this.caudalFilteredBy5LastHours = this.getDataRecordsAverageInTheLast5Hours(this.caudalSensorData, this.CAUDAL_SENSOR)
       this.moistureFilteredBy5LastHours = this.getDataRecordsAverageInTheLast5Hours(this.moistureSensorData, this.MOISTURE_SENSOR)
+      this.humidityFilteredBy5LastHours = this.getDataRecordsAverageInTheLast5Hours(this.humiditySensorData, this.HUMIDITY_SENSOR)
 
       this.temperatureFilteredBy5LastHours === null? this.temperatureHasData = !this.temperatureHasData: this.temperatureHasData = true;
       this.caudalFilteredBy5LastHours === null? this.caudalHasData = !this.caudalHasData: this.caudalHasData = true;
       this.moistureFilteredBy5LastHours === null? this.moistureHasData = !this.moistureHasData: this.moistureHasData = true;
       this.humidityFilteredBy5LastHours === null? this.humidityHasData = !this.humidityHasData: this.humidityHasData = true;
 
+      console.log("RESPUESTA", this.humidityHasData)
     })
 
 
@@ -123,6 +128,7 @@ export class PrincipalViewComponent implements OnInit{
       const date = new Date(record.name);
       console.log("date", date.toLocaleString())
       let hour = date.toLocaleString().substring(10, 12); // Agrupar por año-mes-día-hora
+      console.log("hour", hour)
       hour = this.convertDate(hour, date)
 
       // console.log("hora", hour)
@@ -185,9 +191,11 @@ export class PrincipalViewComponent implements OnInit{
         0 !== data.value? value = data.value: 0;
       })
     if (value !== 0){
+      console.log("arreglo listo para mostrar:", mergedArray)
       return mergedArray
     }
     else {
+      console.log("error", mergedArray)
       return null
     }
   }

@@ -22,17 +22,17 @@
 
   <div class="grid grid-cols-2 gap-6">
     <div>
-      <h2 class="mb-4">Consumo de agua</h2>
+      <h2 class="mb-4">Water Consumption</h2>
       <div *ngIf="waterUsageChart[0]">
         <ngx-charts-line-chart
           [view]="view"
           [scheme]="colorScheme"
           [showXAxisLabel]="showXAxisLabel"
-          [showYAxisLabel]="showYAxisLabel"
           [xAxis]="xAxis"
           [yAxis]="yAxis"
           [xAxisLabel]="xAxisLabel"
-          [yAxisLabel]="'Consumo de agua'"
+          [autoScale]="true"
+          [yAxisLabel]="'Water Consumption'"
           [timeline]="timeline"
           [results]="waterUsageChart"
           (select)="onSelect($event)"
@@ -46,16 +46,16 @@
       </div>
     </div>
     <div>
-      <h2 class="mb-4">Humedad del suelo</h2>
+      <h2 class="mb-4">Soil Moisture</h2>
       <div *ngIf="moistureChart[0]">
         <ngx-charts-line-chart
           [view]="view"
           [scheme]="colorScheme"
           [showXAxisLabel]="showXAxisLabel"
-          [showYAxisLabel]="showYAxisLabel"
           [xAxis]="xAxis"
           [yAxis]="yAxis"
           [xAxisLabel]="xAxisLabel"
+          [autoScale]="true"
           [yAxisLabel]="'Humedad del suelo'"
           [timeline]="timeline"
           [results]="moistureChart"
@@ -70,17 +70,17 @@
       </div>
     </div>
     <div>
-      <h2 class="mb-4">Humedad relativa</h2>
+      <h2 class="mb-4">Air Humidity</h2>
       <div *ngIf="humidityChart[0]">
         <ngx-charts-line-chart
           [view]="view"
           [scheme]="colorScheme"
           [showXAxisLabel]="showXAxisLabel"
-          [showYAxisLabel]="showYAxisLabel"
           [xAxis]="xAxis"
           [yAxis]="yAxis"
           [xAxisLabel]="xAxisLabel"
-          [yAxisLabel]="'Humedad relativa'"
+          [autoScale]="true"
+          [yAxisLabel]="'Air Humidity'"
           [timeline]="timeline"
           [results]="humidityChart"
           (select)="onSelect($event)"
@@ -94,17 +94,17 @@
       </div>
     </div>
     <div>
-      <h2 class="mb-4">Temperatura del aire</h2>
+      <h2 class="mb-4">Air Temperature</h2>
       <div *ngIf="temperatureChart[0]">
         <ngx-charts-line-chart
           [view]="view"
           [scheme]="colorScheme"
           [showXAxisLabel]="showXAxisLabel"
-          [showYAxisLabel]="showYAxisLabel"
           [xAxis]="xAxis"
           [yAxis]="yAxis"
           [xAxisLabel]="xAxisLabel"
-          [yAxisLabel]="'temperatura del aire'"
+          [autoScale]="true"
+          [yAxisLabel]="'Air Temperature'"
           [timeline]="timeline"
           [results]="temperatureChart"
           (select)="onSelect($event)"

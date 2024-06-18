@@ -5,7 +5,7 @@
         <div class="py-8 mx-4 w-3/4 flex">
           <div class="">
             <div class="font-extra bold text-secondary" style="font-size: 22px;">
-              Clima
+              Weather
             </div>
             <div class="text-sm-5 font-semibold text-textparrafo">
               {{WeatherData.name}}
@@ -33,7 +33,7 @@
         <div class="py-8 mx-4 w-3/4">
           <div class="overflow-hidden flex justify-end items-center text-base-2 text-secondary">
             <div class="font-extrabold text-secondary" style="font-size: 17px;">
-              Humedad del suelo
+              Soil Moisture
             </div>
             <button mat-mini-fab [routerLink]="['/historical-data']" class="ml-9 bg-white hover:bg-fontwhate w-10 h-10 cursor-pointer rounded-full" aria-label="Example icon button with a filter list icon">
               <mat-icon  aria-hidden="false" aria-label="Example home icon" fontIcon="navigate_next"></mat-icon>
@@ -61,7 +61,7 @@
             </ngx-charts-bar-vertical>
           </div>
           <div *ngIf="!moistureHasData">
-            <p>No hubo registro en las últimas 5 horas</p>
+            <p>There was no registration in the last 5 hours</p>
           </div>
         </div>
       </div>
@@ -69,7 +69,7 @@
         <div class="py-8 mx-4 w-3/4">
           <div class="overflow-hidden flex justify-end items-center text-base-2 text-secondary">
             <div class="font-extrabold text-secondary" style="font-size: 17px;">
-              Temperatura ambiente
+              Air Temperature
             </div>
             <button mat-mini-fab [routerLink]="['/historical-data']" class="ml-7 bg-white hover:bg-fontwhate w-10 h-10 cursor-pointer rounded-full" aria-label="Example icon button with a filter list icon">
               <mat-icon  aria-hidden="false" aria-label="Example home icon" fontIcon="navigate_next"></mat-icon>
@@ -97,7 +97,7 @@
             </ngx-charts-bar-vertical>
           </div>
           <div *ngIf="!temperatureHasData">
-            <p>No hubo registro en las últimas 5 horas</p>
+            <p>There was no registration in the last 5 hours</p>
           </div>
         </div>
       </div>
@@ -108,7 +108,7 @@
           <div class="py-8 mx-4 w-3/4">
             <div class="overflow-hidden flex justify-end items-center text-base-2 text-secondary">
               <div class="font-extrabold text-secondary" style="font-size: 17px;">
-                Consumo del agua
+                Water Consumption
               </div>
               <button mat-mini-fab class="ml-12 bg-white hover:bg-fontwhate w-10 h-10 cursor-pointer rounded-full" aria-label="Example icon button with a filter list icon">
                 <mat-icon [routerLink]="['/historical-data']" aria-hidden="false" aria-label="Example home icon" fontIcon="navigate_next"></mat-icon>
@@ -136,7 +136,7 @@
               </ngx-charts-bar-vertical>
             </div>
             <div *ngIf="!caudalHasData">
-              <p>No hubo registro en las últimas 5 horas</p>
+              <p>There was no registration in the last 5 hours</p>
             </div>
           </div>
         </div>
@@ -144,7 +144,7 @@
           <div class="py-8 mx-4 w-3/4">
             <div class="overflow-hidden flex justify-end items-center text-base-2 text-secondary">
               <div class="font-extrabold text-secondary" style="font-size: 17px;">
-                Humedad Relativa
+                Air Humidity
               </div>
               <button mat-mini-fab [routerLink]="['/historical-data']" class="ml-9 bg-white hover:bg-fontwhate w-10 h-10 cursor-pointer rounded-full" aria-label="Example icon button with a filter list icon">
                 <mat-icon  aria-hidden="false" aria-label="Example home icon" fontIcon="navigate_next"></mat-icon>
@@ -159,7 +159,7 @@
                 [view]="view"
                 [barPadding]="barPadding"
                 [scheme]="colorScheme"
-                [results]="single"
+                [results]="humidityFilteredBy5LastHours"
                 [gradient]="gradient"
                 [xAxis]="showXAxis"
                 [yAxis]="showYAxis"
@@ -172,7 +172,7 @@
               </ngx-charts-bar-vertical>
             </div>
             <div *ngIf="!humidityHasData">
-              <p>No hubo registro en las últimas 5 horas</p>
+              <p>There was no registration in the last 5 hours</p>
             </div>
           </div>
         </div>
@@ -180,7 +180,7 @@
           <div class="py-8 mx-4 w-3/4">
             <div class="overflow-hidden flex justify-end items-center text-base-2 text-secondary">
               <div class="font-extrabold text-secondary" style="font-size: 17px;">
-                Dispositivos
+                Devices
               </div>
               <button mat-mini-fab [routerLink]="['/devices']" class="ml-9 bg-white hover:bg-fontwhate w-10 h-10 cursor-pointer rounded-full" aria-label="Example icon button with a filter list icon">
                 <mat-icon  aria-hidden="false" aria-label="Example home icon" fontIcon="navigate_next"></mat-icon>

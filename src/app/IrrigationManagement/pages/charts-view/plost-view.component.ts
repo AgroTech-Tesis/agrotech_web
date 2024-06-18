@@ -36,16 +36,16 @@ import {SensorService} from "../../services/sensor.service";
 export class PlostViewComponent implements OnInit{
   selectedOption: string = 'general';
   zones: any;
-  dateSelectedOption: string = "hoy";
+  dateSelectedOption: string = "today";
   dateFilter = [
-    "hoy",
-    "1 semana",
-    "1 mes",
+    "today",
+    "last week",
+    "last month",
   ]
   private readonly TEMPERATURE_SENSOR: string = "SENSOR DE TEMPERATURA";
   private readonly CAUDAL_SENSOR: string = "SENSOR DE CAUDAL";
   private readonly MOISTURE_SENSOR: string = "SENSOR DE HUMEDAD";
-  private readonly HUMIDITY_SENSOR: string = "SENSOR DE HUMEDAD RELATIVA";
+  private readonly HUMIDITY_SENSOR: string = "SENSOR DE HUMEDAD DEL AIRE";
   dataRecordsSubject: Subject<any> = new Subject();
   moistureChart: any;
   waterUsageChart: any;
@@ -64,7 +64,7 @@ export class PlostViewComponent implements OnInit{
   yAxis: boolean = true;
   showYAxisLabel: boolean = true;
   showXAxisLabel: boolean = true;
-  xAxisLabel: string = 'Tiempo';
+  xAxisLabel: string = 'Time';
   yAxisLabel: string = 'Consumo de Agua';
   timeline: boolean = true;
 
@@ -92,18 +92,18 @@ export class PlostViewComponent implements OnInit{
     this.getSensorDataRecordFiltered();
   }
   getSensorDataRecordFiltered(){
-    let zoneId = this.selectedOption.toLowerCase() === 'parcela 1'? 1: this.selectedOption.toLowerCase() === 'parcela 2'?2: undefined;
+    let zoneId = this.selectedOption.toLowerCase() === 'parcel 1'? 1: this.selectedOption.toLowerCase() === 'parcel 2'?2: undefined;
     let date: string =  this.dateSelectedOption
     const currentDate = new Date();
     let startDate: Date = new Date();
     switch(date.toLowerCase()) {
-      case "hoy":
+      case "today":
         startDate = new Date(currentDate.setHours(23, 59, 59, 999));
         break;
-      case "1 semana":
+      case "last week":
         startDate = new Date(currentDate.setDate(currentDate.getDate() - 7));
         break;
-      case "1 mes":
+      case "last month":
         startDate = new Date(currentDate.setMonth(currentDate.getMonth() - 1));
         break;
       default:
@@ -116,9 +116,10 @@ export class PlostViewComponent implements OnInit{
       const groupedData = dataRecords.reduce((acc: any, record: any) => {
         const date = new Date(record.createdAt);
         const sensorType = record.typeSensor;
-        const dateString = date.toISOString().split('T')[0] + " " + date.toISOString().split('T')[1].substring(0,5);
+        let dateString = date.toISOString().split('T')[0] + " " + date.toISOString().split('T')[1].substring(0,5);
         // const dateString = date.toISOString().split('T')[0]; // Tomamos solo la parte de la fecha sin la hora
-        console.log("date", dateString)
+        console.log("date", dateString.substring(6))
+        dateString = dateString.substring(6);
         if (!acc[sensorType]) {
           acc[sensorType] = {};
         }
