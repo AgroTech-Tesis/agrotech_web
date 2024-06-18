@@ -290,7 +290,7 @@ export class PrincipalViewComponent implements OnInit{
       this.devicesStatusSubject.next( [
         {
           "name": "Con fallas",
-          "value": 1
+          "value": this.failedDevices
         },
         {
           "name": "Desconectados",
@@ -298,7 +298,7 @@ export class PrincipalViewComponent implements OnInit{
         },
         {
           "name": "Conectados",
-          "value": 1
+          "value": this.connectedDevices
         }
       ]);
     });
