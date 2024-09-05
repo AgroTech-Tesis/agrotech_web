@@ -1,18 +1,16 @@
-<div *ngIf="isLogin; else signInTemplate" class="text-seagreen h-screen flex flex-col">
-  <navbar class="w-full"></navbar>
+<!--*ngIf="isLogin; else signInTemplate"-->
+<div class="text-seagreen h-screen flex flex-col">
+  <header-bar class="w-full"></header-bar>
   <div class="flex flex-1">
     <div class="bg-gray-800 text-white flex flex-col items-center overflow-y-auto w-64 h-full">
-      <sidebar></sidebar>
+      <side-navigation-bar></side-navigation-bar>
     </div>
     <div class="bg-primary flex-1 h-full">
       <router-outlet style="padding-left: 50px"></router-outlet>
     </div>
   </div>
 </div>
-<!--  <control-panel-view></control-panel-view>-->
+
 <ng-template #signInTemplate>
-  <sign-in (isLogin)="onLogin($event)"></sign-in>
-<!--  <control-panel-view></control-panel-view>-->
-<!--  <devices-view></devices-view>-->
-<!--  <charts-view></charts-view>-->
+<!--  <sign-in (isLogin)="onLogin($event)"></sign-in>-->
 </ng-template>

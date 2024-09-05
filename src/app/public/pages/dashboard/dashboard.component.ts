@@ -1,18 +1,18 @@
 import {Component, OnInit} from '@angular/core';
 import {NgIf} from "@angular/common";
 import {MatIconModule} from '@angular/material/icon';
-import {WeatherForecastService} from "../../services/weather-forecast.service";
+import {WeatherForecastsService} from "../../services/weather-forecasts.service";
 import {RouterLink, RouterOutlet} from "@angular/router";
 import {LegendPosition, NgxChartsModule, ScaleType} from "@swimlane/ngx-charts";
-import {single} from "../../model/BarChartData";
+import {single} from "../../../irrigation/data-records/model/BarChartData";
 // import {single1} from "../../model/PieChartData";
-import {DeviceService} from "../../services/device.service";
+import {DevicesService} from "../../../devices/services/devices.service";
 import {isEmpty, Subject} from "rxjs";
-import {SensorService} from "../../services/sensor.service";
-import {NotificationService} from "../../services/notification.service";
+import {SensorDataRecordsService} from "../../../irrigation/data-records/services/sensor-data-records.service";
+import {NotificationsService} from "../../services/notifications.service";
 
 @Component({
-  selector: 'control-panel-view',
+  selector: 'dashboard',
   standalone: true,
   imports: [
     NgIf,
@@ -21,16 +21,16 @@ import {NotificationService} from "../../services/notification.service";
     RouterOutlet,
     NgxChartsModule
   ],
-  templateUrl: './principal-view.component.html',
-  styleUrl: './principal-view.component.css'
+  templateUrl: './dashboard.component.html',
+  styleUrl: './dashboard.component.css'
 })
-export class PrincipalViewComponent implements OnInit{
+export class DashboardComponent implements OnInit{
 
   constructor(
-    private weatherForecastService: WeatherForecastService,
-    private notificationService: NotificationService,
-    private deviceService: DeviceService,
-    private sensorService: SensorService) {
+    private weatherForecastService: WeatherForecastsService,
+    private notificationService: NotificationsService,
+    private deviceService: DevicesService,
+    private sensorService: SensorDataRecordsService) {
     // Object.assign(this, { single })
     // Object.assign(this, { single1 });
   }
@@ -63,7 +63,7 @@ export class PrincipalViewComponent implements OnInit{
   ngOnInit() {
 
     // Get weather forecast
-    this.weatherForecastService.getWeatherData()
+    this.weatherForecastService.getWeatherData('Tumbes')
       .then(data => {
         this.WeatherData = data;
       })

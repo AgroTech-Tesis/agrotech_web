@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatChipEditedEvent, MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
@@ -9,13 +8,12 @@ import {MatInputModule} from '@angular/material/input';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {FormGroup, FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Color, NgxChartsModule, ScaleType} from "@swimlane/ngx-charts";
-import {multi} from "../../model/LineChartData";
 import {ArduinoIotService} from "../../services/arduino-iot";
 import {MatButtonToggle, MatButtonToggleGroup} from "@angular/material/button-toggle";
-import {ZoneService} from "../../services/zone.service";
+import {ZonesService} from "../../../../devices/services/zones.service";
 import {MatButton} from "@angular/material/button";
 import {Subject} from "rxjs";
-import {SensorService} from "../../services/sensor.service";
+import {SensorDataRecordsService} from "../../services/sensor-data-records.service";
 
 
 @Component({
@@ -30,10 +28,10 @@ import {SensorService} from "../../services/sensor.service";
     FormsModule,
     ReactiveFormsModule,
     NgxChartsModule, MatButtonToggleGroup, MatButtonToggle, MatButton],
-  templateUrl: './plost-view.component.html',
-  styleUrl: './plost-view.component.css'
+  templateUrl: './charts.component.html',
+  styleUrl: './charts.component.css'
 })
-export class PlostViewComponent implements OnInit{
+export class ChartsComponent implements OnInit{
   selectedOption: string = 'general';
   zones: any;
   dateSelectedOption: string = "today";
@@ -75,13 +73,13 @@ export class PlostViewComponent implements OnInit{
     domain: ['#f00', '#0f0', '#0ff'],
   };
 
-  constructor(private zoneService: ZoneService, private sensorService: SensorService) {
+  constructor(private zoneService: ZonesService, private sensorService: SensorDataRecordsService) {
     // Object.assign(this, { multi });
     this.dataRecordsSubject.subscribe()
   }
 
   ngOnInit() {
-    this.zoneService.getZones().subscribe((zones: any) => {
+    this.zoneService.getAll().subscribe((zones: any) => {
       zones.unshift({name: 'general'})
       this.zones = zones;
     })
@@ -168,6 +166,4 @@ export class PlostViewComponent implements OnInit{
   onDeactivate(data: any): void {
     // console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
-
-  protected readonly multi = multi;
 }

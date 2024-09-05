@@ -1,15 +1,15 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
-import {DeviceService} from "../../services/device.service";
-import {Device} from "../../model/Device";
+import {DevicesService} from "../../services/devices.service";
+import {Device} from "../../model/device";
 import {HttpClientModule} from "@angular/common/http";
 import {MatAccordion, MatExpansionModule, MatExpansionPanel} from '@angular/material/expansion';
 import {NgForOf, NgIf} from "@angular/common";
 import {provideNativeDateAdapter} from "@angular/material/core";
 import {MatButton} from "@angular/material/button";
 import {MatDivider} from "@angular/material/divider";
-import {ArduinoIotService} from "../../services/arduino-iot";
+import {formatDateTime} from "../../../shared/utils/format-date-time";
 
 
 @Component({
@@ -27,7 +27,7 @@ export class DevicesViewComponent implements OnInit{
 
   displayedColumns: string[] = ['Device Name', 'Location', 'Created Date', 'Status'];
 
-  constructor(private deviceService: DeviceService) {
+  constructor(private deviceService: DevicesService) {
       this.deviceData = {} as MatTableDataSource<Device>
 
   }
@@ -40,11 +40,7 @@ export class DevicesViewComponent implements OnInit{
       this.deviceData = new MatTableDataSource(devices);
       console.log(this.deviceData.data)
     })
-
   }
 
-  formatDateTime(dateTimeString: string): string {
-    const dateTime = new Date(dateTimeString);
-    return dateTime.toLocaleString('es-ES');
-  }
+  protected readonly formatDateTime = formatDateTime;
 }

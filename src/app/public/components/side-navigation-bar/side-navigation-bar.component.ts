@@ -3,16 +3,16 @@ import {MatIcon} from "@angular/material/icon";
 import {RouterLink, RouterLinkActive} from "@angular/router";
 
 @Component({
-  selector: 'sidebar',
+  selector: 'side-navigation-bar',
   standalone: true,
   imports: [
     MatIcon,
     RouterLink,
     RouterLinkActive
   ],
-  templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.css'
+  templateUrl: './side-navigation-bar.component.html',
+  styleUrl: './side-navigation-bar.component.css'
 })
-export class SidebarComponent {
+export class SideNavigationBarComponent {
 
 }

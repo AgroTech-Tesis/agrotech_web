@@ -6,8 +6,8 @@ import {HOST} from "../../../../environments/enviroment.conts";
 @Injectable({
   providedIn: 'root'
 })
-export class NotificationService {
-  dataRecordPath =   `${HOST.local}/notification`
+export class NotificationsService {
+  dataRecordPath =   `${HOST.local}/notifications`
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',

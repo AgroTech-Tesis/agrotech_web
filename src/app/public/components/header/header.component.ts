@@ -4,16 +4,16 @@ import {DatePipe, formatDate, NgOptimizedImage} from "@angular/common";
 import {TranslateService} from "@ngx-translate/core";
 
 @Component({
-  selector: 'navbar',
+  selector: 'header-bar',
   standalone: true,
   imports: [
     MatIcon,
     NgOptimizedImage
   ],
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  templateUrl: './header.component.html',
+  styleUrl: './header.component.css'
 })
-export class NavbarComponent{
+export class HeaderComponent {
   time: any;
   hours: any;
   msg: any;

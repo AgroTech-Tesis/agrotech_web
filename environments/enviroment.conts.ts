@@ -9,6 +9,8 @@ export const hostSelected = {
     host2: HOST.local2
 };
 
+export const API_KEY = '2f9e9bd1c34f8074792547f6b3bf82bb'
+
 
 
 

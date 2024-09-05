@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { WeatherForecast } from '../model/WeatherForecast';
+import { WeatherForecast } from '../../../public/model/weather-forecast';
 import {multi} from "../model/LineChartData";
 @Injectable({
   providedIn: 'root'
 })
-export class LineChartService {
+export class LineChartsService {
   view: any[] = [700, 300];
 
   // options

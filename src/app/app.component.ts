@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {RouterLink, RouterOutlet} from '@angular/router';
-import { SignInComponent } from './IdentityAndAccessManagement/sign-in/sign-in.component';
-import { PrincipalViewComponent } from './IrrigationManagement/pages/control-panel-view/principal-view.component';
+import { SignInComponent } from './iam/sign-in/sign-in.component';
+import { DashboardComponent } from './public/pages/dashboard/dashboard.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,13 +9,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { DevicesViewComponent } from './IrrigationManagement/pages/devices-view/devices-view.component';
-import { PlostViewComponent } from './IrrigationManagement/pages/charts-view/plost-view.component';
-import { ConfigurationViewComponent } from './IrrigationManagement/pages/settings-view/configuration-view.component';
+import { DevicesViewComponent } from './devices/pages/devices-view/devices-view.component';
+import { ChartsComponent } from './irrigation/data-records/pages/charts-view/charts.component';
+import { ConfigurationViewComponent } from './public/pages/settings-view/configuration-view.component';
 import {HttpClientModule} from "@angular/common/http";
-import {NavbarComponent} from "./components/navbar/navbar.component";
-import {SidebarComponent} from "./components/sidebar/sidebar.component";
 import { CommonModule } from '@angular/common';
+import {SideNavigationBarComponent} from "./public/components/side-navigation-bar/side-navigation-bar.component";
+import {HeaderComponent} from "./public/components/header/header.component";
 
 @Component({
   selector: 'app-root',
@@ -23,7 +23,7 @@ import { CommonModule } from '@angular/common';
   imports: [RouterOutlet,
     RouterLink,
     SignInComponent,
-    PrincipalViewComponent,
+    DashboardComponent,
     MatSlideToggleModule,
     MatToolbarModule,
     MatIconModule,
@@ -33,9 +33,9 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     ReactiveFormsModule,
     DevicesViewComponent,
-    PlostViewComponent,
+    ChartsComponent,
     ConfigurationViewComponent,
-    HttpClientModule, NavbarComponent, SidebarComponent,
+    HttpClientModule, SideNavigationBarComponent, HeaderComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

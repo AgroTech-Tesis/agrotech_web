@@ -1,16 +1,16 @@
 import { RouterModule, Routes } from '@angular/router';
-import { PrincipalViewComponent } from './IrrigationManagement/pages/control-panel-view/principal-view.component';
-import { DevicesViewComponent } from './IrrigationManagement/pages/devices-view/devices-view.component';
-import { SignInComponent } from './IdentityAndAccessManagement/sign-in/sign-in.component';
-import { PlostViewComponent } from './IrrigationManagement/pages/charts-view/plost-view.component';
+import { DashboardComponent } from './public/pages/dashboard/dashboard.component';
+import { DevicesViewComponent } from './devices/pages/devices-view/devices-view.component';
+import { SignInComponent } from './iam/sign-in/sign-in.component';
+import { ChartsComponent } from './irrigation/data-records/pages/charts-view/charts.component';
 import { NgModule } from '@angular/core';
-import {ConfigurationViewComponent} from "./IrrigationManagement/pages/settings-view/configuration-view.component";
+import {ConfigurationViewComponent} from "./public/pages/settings-view/configuration-view.component";
 
 export const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  { path: 'dashboard', component: PrincipalViewComponent },
+  { path: 'dashboard', component: DashboardComponent },
   { path: 'devices', component: DevicesViewComponent },
-  { path: 'historical-data', component: PlostViewComponent },
+  { path: 'historical-data', component: ChartsComponent },
   { path: 'sign-in', component: SignInComponent },
   { path: 'settings', component: ConfigurationViewComponent },
 ];
