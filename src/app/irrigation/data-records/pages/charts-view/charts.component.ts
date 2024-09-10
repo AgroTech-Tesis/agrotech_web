@@ -40,30 +40,18 @@ export class ChartsComponent implements OnInit{
     "last week",
     "last month",
   ]
-  private readonly TEMPERATURE_SENSOR: string = "SENSOR DE TEMPERATURA";
-  private readonly CAUDAL_SENSOR: string = "SENSOR DE CAUDAL";
-  private readonly MOISTURE_SENSOR: string = "SENSOR DE HUMEDAD";
-  private readonly HUMIDITY_SENSOR: string = "SENSOR DE HUMEDAD DEL AIRE";
-  dataRecordsSubject: Subject<any> = new Subject();
   moistureChart: any;
   waterUsageChart: any;
   humidityChart: any;
   temperatureChart: any;
 
-
-  // humedad del suelo line chart
   view: [number, number] = [500, 300];
-
   // options
-  legend: boolean = true;
-  showLabels: boolean = true;
   animations: boolean = true;
   xAxis: boolean = true;
   yAxis: boolean = true;
-  showYAxisLabel: boolean = true;
   showXAxisLabel: boolean = true;
   xAxisLabel: string = 'Time';
-  yAxisLabel: string = 'Consumo de Agua';
   timeline: boolean = true;
 
   colorScheme = {
@@ -73,97 +61,106 @@ export class ChartsComponent implements OnInit{
     domain: ['#f00', '#0f0', '#0ff'],
   };
 
-  constructor(private zoneService: ZonesService, private sensorService: SensorDataRecordsService) {
-    // Object.assign(this, { multi });
-    this.dataRecordsSubject.subscribe()
-  }
+  constructor(
+    private zoneService: ZonesService,
+    private sensorService: SensorDataRecordsService)
+  { }
 
   ngOnInit() {
+    this.loadZones();
+  }
+  loadZones(): void {
     this.zoneService.getAll().subscribe((zones: any) => {
-      zones.unshift({name: 'general'})
-      this.zones = zones;
-    })
-    this.getSensorDataRecordFiltered();
+      this.zones = [{ id: 0, name: 'general'}, ...zones];
+      this.getFilteredSensorData();
+    });
   }
 
-  applyChanges(){
-    this.getSensorDataRecordFiltered();
-  }
-  getSensorDataRecordFiltered(){
-    let zoneId = this.selectedOption.toLowerCase() === 'parcel 1'? 1: this.selectedOption.toLowerCase() === 'parcel 2'?2: undefined;
-    let date: string =  this.dateSelectedOption
-    const currentDate = new Date();
-    let startDate: Date = new Date();
-    switch(date.toLowerCase()) {
-      case "today":
-        startDate = new Date(currentDate.setHours(23, 59, 59, 999));
-        break;
-      case "last week":
-        startDate = new Date(currentDate.setDate(currentDate.getDate() - 7));
-        break;
-      case "last month":
-        startDate = new Date(currentDate.setMonth(currentDate.getMonth() - 1));
-        break;
-      default:
-        startDate = new Date(currentDate.setHours(23, 59, 59, 999));
-        break;
-    }
-    this.sensorService.getSensorDataRecord(startDate.toISOString(), undefined, zoneId).subscribe((dataRecords: any) => {
-      console.log('dataRecords', dataRecords);
-      // Agrupar los registros por 'typeSensor' y fecha
-      const groupedData = dataRecords.reduce((acc: any, record: any) => {
-        const date = new Date(record.createdAt);
-        const sensorType = record.typeSensor;
-        let dateString = date.toISOString().split('T')[0] + " " + date.toISOString().split('T')[1].substring(0,5);
-        // const dateString = date.toISOString().split('T')[0]; // Tomamos solo la parte de la fecha sin la hora
-        console.log("date", dateString.substring(6))
-        dateString = dateString.substring(6);
-        if (!acc[sensorType]) {
-          acc[sensorType] = {};
-        }
-        if (!acc[sensorType][dateString]) {
-          acc[sensorType][dateString] = [];
-        }
-        acc[sensorType][dateString].push(record.lastValue);
-        return acc;
-      }, {});
+  getFilteredSensorData(){
+    const zoneId = this.zones.find((zone:any):any => zone.name.toLowerCase() === this.selectedOption.toLowerCase()).id;
+    const startDate = this.getStartDateByFilter(this.dateSelectedOption);
+    this.sensorService.getSensorDataRecord(startDate.toISOString(), undefined, zoneId)
+      .subscribe((dataRecords: any) => {
+        console.log('dataRecords', dataRecords);
+        // Agrupar los registros por 'typeSensor' y fecha
+        const groupedData = this.groupDataBySensorTypeAndDate(dataRecords);
 
-      // Calcular el promedio de los valores para cada fecha y tipo de sensor
-      const sensorData = Object.keys(groupedData).map(sensorType => ({
-        name: sensorType,
-        series: Object.keys(groupedData[sensorType]).map(dateString => ({
-          name: dateString,
-          value: groupedData[sensorType][dateString].reduce((sum: number, val: number) => sum + val, 0) / groupedData[sensorType][dateString].length
-        }))
-      }));
+        // Calcular el promedio de los valores para cada fecha y tipo de sensor
+        const sensorData = this.calculateAverageValues(groupedData);
 
-      console.log("sensorData", sensorData);
-      this.moistureChart = [sensorData.find(item => item.name === this.MOISTURE_SENSOR)] || undefined;
-      this.waterUsageChart = [sensorData.find(item => item.name === this.CAUDAL_SENSOR)] || undefined;
-      this.temperatureChart = [sensorData.find(item => item.name === this.TEMPERATURE_SENSOR)] || undefined;
-      this.humidityChart = [sensorData.find(item => item.name === this.HUMIDITY_SENSOR)] || undefined;
-      console.log("sensor de moistureChart", this.moistureChart);
-      console.log("sensor de waterUsageChart", this.waterUsageChart);
-      console.log("sensor de temperatureChart", this.temperatureChart);
-      console.log("sensor de humidityChart", this.humidityChart);
-      // Emitir los datos transformados
-      this.dataRecordsSubject.next(sensorData);
+        console.log("sensorData", sensorData);
+        this.updateCharts(sensorData);
+
+        console.log("sensor de moistureChart", this.moistureChart);
+        console.log("sensor de waterUsageChart", this.waterUsageChart);
+        console.log("sensor de temperatureChart", this.temperatureChart);
+        console.log("sensor de humidityChart", this.humidityChart);
     });
 
-    console.log("endDate", startDate.toISOString());
+  }
+  getStartDateByFilter(dateFilter: string): Date {
+    const currentDate = new Date();
+    let resultDate: Date;
 
+    switch (dateFilter.toLowerCase()) {
+      case 'today':
+        resultDate = new Date(currentDate);  // Clona el objeto original
+        resultDate.setHours(0, 0, 0, 0);     // Establece el inicio del día
+        return resultDate;
 
+      case 'last week':
+        resultDate = new Date(currentDate);  // Clona el objeto original
+        resultDate.setDate(resultDate.getDate() - 7);  // Restar 7 días
+        resultDate.setHours(0, 0, 0, 0);     // Establece el inicio del día
+        return resultDate;
+
+      case 'last month':
+        resultDate = new Date(currentDate);  // Clona el objeto original
+        resultDate.setMonth(resultDate.getMonth() - 1);  // Restar un mes
+        resultDate.setHours(0, 0, 0, 0);     // Establece el inicio del día
+        return resultDate;
+
+      default:
+        resultDate = new Date(currentDate);  // Clona el objeto original
+        resultDate.setHours(23, 59, 59, 999); // Establece el fin del día
+        return resultDate;
+    }
   }
 
-  onSelect(data: any): void {
-    // console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+  groupDataBySensorTypeAndDate(dataRecords: any){
+    return dataRecords.reduce((acc: any, record: any) => {
+      const date = new Date(record.createdAt);
+      const sensorType = record.typeSensor;
+      let dateString = date.toISOString().split('T')[0] + " " + date.toISOString().split('T')[1].substring(0,5);
+      dateString = dateString.substring(6);
+
+      if (!acc[sensorType]) acc[sensorType] = {};
+      if (!acc[sensorType][dateString]) acc[sensorType][dateString] = [];
+
+      acc[sensorType][dateString].push(record.lastValue);
+      return acc;
+    },  {});
   }
 
-  onActivate(data: any): void {
-    // console.log('Activate', JSON.parse(JSON.stringify(data)));
+  private calculateAverageValues(groupedData: any): any[] {
+    return Object.keys(groupedData).map(sensorType => ({
+      name: sensorType,
+      series: Object.keys(groupedData[sensorType]).map(date => ({
+        name: date,
+        value: groupedData[sensorType][date].reduce((sum: number, val: number) => sum + val, 0) / groupedData[sensorType][date].length,
+      })),
+    }));
   }
 
-  onDeactivate(data: any): void {
-    // console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+  private updateCharts(sensorData: any): void {
+    this.moistureChart = this.findSensorData(sensorData, 'SENSOR DE HUMEDAD');
+    this.waterUsageChart = this.findSensorData(sensorData, 'SENSOR DE CAUDAL');
+    this.temperatureChart = this.findSensorData(sensorData, 'SENSOR DE TEMPERATURA');
+    this.humidityChart = this.findSensorData(sensorData, 'SENSOR DE HUMEDAD DEL AIRE');
   }
+
+  private findSensorData(sensorData: any[], sensorName: string): any[] | undefined {
+    return [sensorData.find(item => item.name === sensorName)] || undefined;
+  }
+
 }

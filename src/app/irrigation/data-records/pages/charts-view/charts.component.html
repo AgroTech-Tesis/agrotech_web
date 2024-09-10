@@ -4,7 +4,7 @@
     [(ngModel)]="selectedOption"
     aria-label="Option selection"
     appearance="legacy"
-    (change)="this.getSensorDataRecordFiltered()">
+    (change)="this.getFilteredSensorData()">
     <mat-button-toggle *ngFor="let zone of zones" [value]="zone.name">{{ zone.name.toUpperCase() }}</mat-button-toggle>
   </mat-button-toggle-group>
 
@@ -13,7 +13,7 @@
     [(ngModel)]="dateSelectedOption"
     aria-label="Option selection"
     appearance="legacy"
-    (change)="this.getSensorDataRecordFiltered()">
+    (change)="this.getFilteredSensorData()">
     <mat-button-toggle *ngFor="let date of dateFilter; let index = index" [value]="date">{{ date.toUpperCase() }}</mat-button-toggle>
   </mat-button-toggle-group>
 
@@ -35,14 +35,11 @@
           [yAxisLabel]="'Water Consumption'"
           [timeline]="timeline"
           [results]="waterUsageChart"
-          (select)="onSelect($event)"
-          (activate)="onActivate($event)"
-          (deactivate)="onDeactivate($event)"
         >
         </ngx-charts-line-chart>
       </div>
       <div *ngIf="!waterUsageChart[0]">
-        <p>No hubo registro para el filtro aplicado</p>
+        <p>There is not enough data available to generate the chart</p>
       </div>
     </div>
     <div>
@@ -59,14 +56,11 @@
           [yAxisLabel]="'Humedad del suelo'"
           [timeline]="timeline"
           [results]="moistureChart"
-          (select)="onSelect($event)"
-          (activate)="onActivate($event)"
-          (deactivate)="onDeactivate($event)"
         >
         </ngx-charts-line-chart>
       </div>
       <div *ngIf="!moistureChart[0]">
-        <p>No hubo registro para el filtro aplicado</p>
+        <p>There is not enough data available to generate the chart</p>
       </div>
     </div>
     <div>
@@ -83,14 +77,11 @@
           [yAxisLabel]="'Air Humidity'"
           [timeline]="timeline"
           [results]="humidityChart"
-          (select)="onSelect($event)"
-          (activate)="onActivate($event)"
-          (deactivate)="onDeactivate($event)"
         >
         </ngx-charts-line-chart>
       </div>
       <div *ngIf="!humidityChart[0]">
-        <p>No hubo registro para el filtro aplicado</p>
+        <p>There is not enough data available to generate the chart</p>
       </div>
     </div>
     <div>
@@ -107,14 +98,11 @@
           [yAxisLabel]="'Air Temperature'"
           [timeline]="timeline"
           [results]="temperatureChart"
-          (select)="onSelect($event)"
-          (activate)="onActivate($event)"
-          (deactivate)="onDeactivate($event)"
         >
         </ngx-charts-line-chart>
       </div>
       <div *ngIf="!temperatureChart[0]">
-        <p>No hubo registro para el filtro aplicado</p>
+        <p>There is not enough data available to generate the chart</p>
       </div>
 
     </div>

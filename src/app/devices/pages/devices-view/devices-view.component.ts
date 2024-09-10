@@ -25,7 +25,7 @@ export class DevicesViewComponent implements OnInit{
   @ViewChild(MatAccordion) accordion: MatAccordion | undefined;
   panelOpenState = false;
 
-  displayedColumns: string[] = ['Device Name', 'Location', 'Created Date', 'Status'];
+  displayedColumns: string[] = ['Device Name', 'Location', 'Installation Date', 'Status'];
 
   constructor(private deviceService: DevicesService) {
       this.deviceData = {} as MatTableDataSource<Device>
