@@ -35,7 +35,7 @@
             <div class="font-extrabold text-secondary" style="font-size: 17px;">
               Soil Moisture
             </div>
-            <button mat-mini-fab [routerLink]="['/historical-data']" class="ml-9 bg-white hover:bg-fontwhate w-10 h-10 cursor-pointer rounded-full" aria-label="Example icon button with a filter list icon">
+            <button  [routerLink]="['/historical-data']" class="ml-9 bg-white hover:bg-fontwhate w-10 h-10 cursor-pointer rounded-full" aria-label="Example icon button with a filter list icon">
               <mat-icon  aria-hidden="false" aria-label="Example home icon" fontIcon="navigate_next"></mat-icon>
             </button>
           </div>
@@ -52,8 +52,7 @@
               [showXAxisLabel]="showXAxisLabel"
               [showYAxisLabel]="showYAxisLabel"
               [xAxisLabel]="xAxisLabel"
-              [yAxisLabel]="yAxisLabel"
-              (select)="onSelect($event)">
+              [yAxisLabel]="yAxisLabel">
             </ngx-charts-bar-vertical>
           </div>
           <div *ngIf="!moistureHasData">
@@ -67,7 +66,7 @@
             <div class="font-extrabold text-secondary" style="font-size: 17px;">
               Air Temperature
             </div>
-            <button mat-mini-fab [routerLink]="['/historical-data']" class="ml-7 bg-white hover:bg-fontwhate w-10 h-10 cursor-pointer rounded-full" aria-label="Example icon button with a filter list icon">
+            <button  [routerLink]="['/historical-data']" class="ml-7 bg-white hover:bg-fontwhate w-10 h-10 cursor-pointer rounded-full" aria-label="Example icon button with a filter list icon">
               <mat-icon  aria-hidden="false" aria-label="Example home icon" fontIcon="navigate_next"></mat-icon>
             </button>
           </div>
@@ -84,8 +83,7 @@
               [showXAxisLabel]="showXAxisLabel"
               [showYAxisLabel]="showYAxisLabel"
               [xAxisLabel]="xAxisLabel"
-              [yAxisLabel]="yAxisLabel"
-              (select)="onSelect($event)">
+              [yAxisLabel]="yAxisLabel">
             </ngx-charts-bar-vertical>
           </div>
           <div *ngIf="!temperatureHasData">
@@ -102,7 +100,7 @@
               <div class="font-extrabold text-secondary" style="font-size: 17px;">
                 Water Consumption
               </div>
-              <button mat-mini-fab class="ml-12 bg-white hover:bg-fontwhate w-10 h-10 cursor-pointer rounded-full" aria-label="Example icon button with a filter list icon">
+              <button  class="ml-12 bg-white hover:bg-fontwhate w-10 h-10 cursor-pointer rounded-full" aria-label="Example icon button with a filter list icon">
                 <mat-icon [routerLink]="['/historical-data']" aria-hidden="false" aria-label="Example home icon" fontIcon="navigate_next"></mat-icon>
               </button>
             </div>
@@ -119,8 +117,7 @@
                 [showXAxisLabel]="showXAxisLabel"
                 [showYAxisLabel]="showYAxisLabel"
                 [xAxisLabel]="xAxisLabel"
-                [yAxisLabel]="yAxisLabel"
-                (select)="onSelect($event)">
+                [yAxisLabel]="yAxisLabel">
               </ngx-charts-bar-vertical>
             </div>
             <div *ngIf="!caudalHasData">
@@ -134,7 +131,7 @@
               <div class="font-extrabold text-secondary" style="font-size: 17px;">
                 Air Humidity
               </div>
-              <button mat-mini-fab [routerLink]="['/historical-data']" class="ml-9 bg-white hover:bg-fontwhate w-10 h-10 cursor-pointer rounded-full" aria-label="Example icon button with a filter list icon">
+              <button  [routerLink]="['/historical-data']" class="ml-9 bg-white hover:bg-fontwhate w-10 h-10 cursor-pointer rounded-full" aria-label="Example icon button with a filter list icon">
                 <mat-icon  aria-hidden="false" aria-label="Example home icon" fontIcon="navigate_next"></mat-icon>
               </button>
             </div>
@@ -151,8 +148,7 @@
                 [showXAxisLabel]="showXAxisLabel"
                 [showYAxisLabel]="showYAxisLabel"
                 [xAxisLabel]="xAxisLabel"
-                [yAxisLabel]="yAxisLabel"
-                (select)="onSelect($event)">
+                [yAxisLabel]="yAxisLabel">
               </ngx-charts-bar-vertical>
             </div>
             <div *ngIf="!humidityHasData">
@@ -166,7 +162,7 @@
               <div class="font-extrabold text-secondary" style="font-size: 17px;">
                 Devices
               </div>
-              <button mat-mini-fab [routerLink]="['/devices']" class="ml-9 bg-white hover:bg-fontwhate w-10 h-10 cursor-pointer rounded-full" aria-label="Example icon button with a filter list icon">
+              <button  [routerLink]="['/devices']" class="ml-9 bg-white hover:bg-fontwhate w-10 h-10 cursor-pointer rounded-full" aria-label="Example icon button with a filter list icon">
                 <mat-icon  aria-hidden="false" aria-label="Example home icon" fontIcon="navigate_next"></mat-icon>
               </button>
             </div>
@@ -178,10 +174,7 @@
               [labels]="showLabels1"
               [legend]="showLegend1"
               [legendPosition]="legendPosition1"
-              [doughnut]="isDoughnut1"
-              (select)="onSelect1($event)"
-              (activate)="onActivate1($event)"
-              (deactivate)="onDeactivate1($event)">
+              [doughnut]="isDoughnut1">
             </ngx-charts-pie-chart>
           </div>
         </div>
@@ -193,15 +186,13 @@
       <div class="w-4/5">
         <div class="bg-white rounded-2xl">
           <div class="p-5">
-            <div class="overflow-hidden flex justify-end items-center text-base-2 text-secondary">
+            <div class="overflow-hidden flex justify-center items-center text-base-2 text-secondary">
               <div class="font-extrabold text-xl" style="font-size: 18px;">Notifications</div>
-              <button mat-mini-fab class="ml-12 bg-white hover:bg-fontwhate w-10 h-10 cursor-pointer rounded-full" aria-label="Example icon button with a filter list icon">
-                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="navigate_next"></mat-icon>
-              </button>
+
             </div>
             <div class="my-5 bg-slate-100	rounded-lg p-2">
               <div class="my-2" *ngFor="let notification of notificationList">
-                <div class="text-4xl font-medium text-textparrafo" style="font-size: 15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                <div class="text-4xl font-medium text-textparrafo" style="font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                   {{notification.body}}
                 </div>
                 <div class="font-light text-textligth">

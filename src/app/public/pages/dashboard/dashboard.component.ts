@@ -4,10 +4,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {WeatherForecastsService} from "../../services/weather-forecasts.service";
 import {RouterLink, RouterOutlet} from "@angular/router";
 import {LegendPosition, NgxChartsModule, ScaleType} from "@swimlane/ngx-charts";
-import {single} from "../../../irrigation/data-records/model/BarChartData";
-// import {single1} from "../../model/PieChartData";
 import {DevicesService} from "../../../devices/services/devices.service";
-import {isEmpty, Subject} from "rxjs";
+import { Subject} from "rxjs";
 import {SensorDataRecordsService} from "../../../irrigation/data-records/services/sensor-data-records.service";
 import {NotificationsService} from "../../services/notifications.service";
 
@@ -30,16 +28,13 @@ export class DashboardComponent implements OnInit{
     private weatherForecastService: WeatherForecastsService,
     private notificationService: NotificationsService,
     private deviceService: DevicesService,
-    private sensorService: SensorDataRecordsService) {
-    // Object.assign(this, { single })
-    // Object.assign(this, { single1 });
-  }
+    private sensorService: SensorDataRecordsService)
+  {}
 
   //Variables
   WeatherData: any;
 
   single1: any
-  single: any
   devicesStatusSubject: Subject<any> = new Subject();
   dataRecordsSubject: Subject<any> = new Subject();
   caudalSensorData: any[] = []
@@ -80,11 +75,11 @@ export class DashboardComponent implements OnInit{
 
     this.getSensorDataRecord();
     this.dataRecordsSubject.subscribe(records =>{
-      console.log("records", records)
       this.caudalSensorData = records.filter((caudal:any)=> caudal.typeSensor === this.CAUDAL_SENSOR)
       this.temperatureSensorData = records.filter((temperature:any)=> temperature.typeSensor === this.TEMPERATURE_SENSOR)
       this.moistureSensorData = records.filter((moisture:any)=> moisture.typeSensor === this.MOISTURE_SENSOR)
       this.humiditySensorData = records.filter((moisture:any)=> moisture.typeSensor === this.HUMIDITY_SENSOR)
+
       // this.single is an arrays that contains the average of the values in the last 5 hours
       this.temperatureFilteredBy5LastHours = this.getDataRecordsAverageInTheLast5Hours(this.temperatureSensorData, this.TEMPERATURE_SENSOR)
       this.caudalFilteredBy5LastHours = this.getDataRecordsAverageInTheLast5Hours(this.caudalSensorData, this.CAUDAL_SENSOR)
@@ -96,18 +91,12 @@ export class DashboardComponent implements OnInit{
       this.moistureFilteredBy5LastHours === null? this.moistureHasData = !this.moistureHasData: this.moistureHasData = true;
       this.humidityFilteredBy5LastHours === null? this.humidityHasData = !this.humidityHasData: this.humidityHasData = true;
 
-      console.log("RESPUESTA", this.humidityHasData)
     })
 
 
   }
   // BAR CHART
   formatDate(dateString: any) {
-    // dependencia 'moment' muy pesado para ejecutar el npm run build, por eso se ha comentado y buscado otra solución
-    // console.log("dateString", dateString);
-    // console.log("moment", moment(dateString).format('DD/MM/YYYY HH:mm:ss'));
-    // return moment(dateString).format('DD/MM/YYYY HH:mm:ss');
-    console.log("dateString", dateString);
 
     const date = new Date(dateString);
 
@@ -122,7 +111,6 @@ export class DashboardComponent implements OnInit{
     // Formateando la fecha
     const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
 
-    console.log("formattedDate", formattedDate);
 
     return formattedDate;
   }
@@ -146,20 +134,15 @@ export class DashboardComponent implements OnInit{
 
     dataRecord.forEach((record: any) => {
       const date = new Date(record.name);
-      console.log("date", date.toLocaleString())
       let hour = date.toLocaleString().substring(10, 12); // Agrupar por año-mes-día-hora
-      console.log("hour", hour)
       hour = this.convertDate(hour, date)
 
-      // console.log("hora", hour)
       if (!groupedData[hour]) {
         groupedData[hour] = [];
       }
 
       groupedData[hour].push(record);
-
     });
-    console.log("Datos agrupados por hora:", groupedData);
 
     // Calcular el promedio de los valores dentro de cada grupo
     let sensorData: any[] = Object.keys(groupedData).map(hour => {
@@ -173,28 +156,20 @@ export class DashboardComponent implements OnInit{
       };
     });
 
-    console.log("Datos con promedio de temperatura:", sensorData);
 
     // Filtrar las últimas 5 horas
     let now = new Date();
     let fiveHoursAgo = new Date(now.getTime() - 5 * 60 * 60 * 1000).toLocaleString(); // Hora actual menos 5 horas
-    console.log("convertirlo en date", new Date(fiveHoursAgo))
-    console.log("now", now)
-    console.log("fiveHoursAgo", fiveHoursAgo)
-// Crear un objeto para las últimas 5 horas con valores predeterminados
+    // Crear un objeto para las últimas 5 horas con valores predeterminados
     const last5HoursData = Array.from({ length: 5 }, (_, index) => {
       let date: Date = new Date(now.getTime() - (index * 60 * 60 * 1000));
       let hour = this.convertDate(date.toLocaleTimeString().substring(0,2), date);
-      console.log("momento de la verdad", hour)
-      // hour = this.convertDate(hour.toLocaleTimeString().substring(0,2));
-      // let formattedHour = hour.toLocaleString().slice(0, 13);
       return {
         name: hour,
         value: 0,
         typeSensor: typeSensor
       };
     });
-    console.log("arreglo prueba", last5HoursData)
 
     // Crear un objeto para una búsqueda rápida de los elementos del variableArray por el name
     const variableArrayMap = new Map(sensorData.map(item => [item.name, item]));
@@ -205,17 +180,14 @@ export class DashboardComponent implements OnInit{
         return matchingItem ? matchingItem : item;
       });
 
-      console.log(mergedArray);
       let value = 0;
       mergedArray.map(data=>{
         0 !== data.value? value = data.value: 0;
       })
     if (value !== 0){
-      console.log("arreglo listo para mostrar:", mergedArray)
       return mergedArray
     }
     else {
-      console.log("error", mergedArray)
       return null
     }
   }
@@ -235,10 +207,6 @@ export class DashboardComponent implements OnInit{
         return transformedRecord;
       });
       this.dataRecordsSubject.next(sensorData)
-      // this.caudalSensorData = sensorData.filter((caudal:any)=> caudal.typeSensor === 'SENSOR DE CAUDAL')
-      // this.temperatureSensorData = sensorData.filter((temperature:any)=> temperature.typeSensor === 'SENSOR DE TEMPERATURA')
-      // this.moistureSensorData = sensorData.filter((moisture:any)=> moisture.typeSensor === 'SENSOR DE HUMEDAD')
-
     });
   }
 
@@ -265,10 +233,6 @@ export class DashboardComponent implements OnInit{
   };
 
 
-  onSelect(event: any) {
-    // console.log(event);
-  }
-
 
   // PIE CHART
 
@@ -289,15 +253,15 @@ export class DashboardComponent implements OnInit{
       })
       this.devicesStatusSubject.next( [
         {
-          "name": "Con fallas",
+          "name": "FAIL",
           "value": this.failedDevices
         },
         {
-          "name": "Desconectados",
+          "name": "DISCONNECTED",
           "value": this.disconnectedDevices
         },
         {
-          "name": "Conectados",
+          "name": "CONNECTED",
           "value": this.connectedDevices
         }
       ]);
@@ -320,17 +284,5 @@ export class DashboardComponent implements OnInit{
     domain: ['#e21111','#333131', '#297739'],
   };
 
-
-  onSelect1(data: any): void {
-    // console.log('Item clicked', JSON.parse(JSON.stringify(data)));
-  }
-
-  onActivate1(data: any): void {
-    // console.log('Activate', JSON.parse(JSON.stringify(data)));
-  }
-
-  onDeactivate1(data: any): void {
-    // console.log('Deactivate', JSON.parse(JSON.stringify(data)));
-  }
 
 }

@@ -19,16 +19,16 @@
       </mat-expansion-panel>
 
       <!-- Filas de datos -->
-      <mat-expansion-panel *ngFor="let element of deviceData.data">
+      <mat-expansion-panel *ngFor="let device of deviceData.data">
         <mat-expansion-panel-header>
           <mat-panel-title class="w-full">
             <div class="grid grid-cols-4 w-full">
-              <div>{{element.deviceName}}</div>
-              <div>{{element.media}}</div>
-              <div>{{formatDateTime(element.createdAt)}}</div>
+              <div>{{device.deviceName}}</div>
+              <div>{{device.media}}</div>
+              <div>{{formatDateTime(device.createdAt)}}</div>
               <div class="w-[200px]">
-                <div [className]="'w-[110px] rounded-2xl p-1 text-white text-center ' + (element.status === 'CONNECTED' ? 'bg-forestgreen': element.status === 'FAIL' ? 'bg-forested' : 'bg-gray-100')">
-                  {{element.status}}
+                <div [className]="'w-[110px] rounded-2xl p-1 text-white text-center ' + (device.status === 'CONNECTED' ? 'bg-forestgreen': device.status === 'FAIL' ? 'bg-forested' : 'bg-gray-100')">
+                  {{device.status}}
                 </div>
               </div>
             </div>
@@ -46,7 +46,7 @@
               <li>Soil Moisture</li>
             </ul>
 <!--          </div>-->
-          <div *ngIf="element.media === 'receptor'">
+          <div *ngIf="device.media === 'receptor'">
             <p>Actuadores:</p>
             <ul>
               <li>Electrovalvula</li>
