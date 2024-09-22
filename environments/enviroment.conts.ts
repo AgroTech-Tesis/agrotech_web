@@ -1,7 +1,9 @@
 export const HOST = {
-    local: 'http://localhost:8080',
-    local2: 'http://localhost:8081',
+    // local: 'http://localhost:8080',
+    // local2: 'http://localhost:8081',
     // local: 'http://despliegue.westus3.cloudapp.azure.com'
+    local: 'http://agrotech.koreacentral.cloudapp.azure.com:8080/irrigation',
+    local2: 'http://agrotech.koreacentral.cloudapp.azure.com:8080/security'
 };
 
 export const hostSelected = {

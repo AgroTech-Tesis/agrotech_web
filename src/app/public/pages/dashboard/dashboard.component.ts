@@ -49,7 +49,7 @@ export class DashboardComponent implements OnInit{
   private readonly TEMPERATURE_SENSOR: string = "SENSOR DE TEMPERATURA";
   private readonly CAUDAL_SENSOR: string = "SENSOR DE CAUDAL";
   private readonly MOISTURE_SENSOR: string = "SENSOR DE HUMEDAD";
-  private readonly HUMIDITY_SENSOR: string = "SENSOR DE HUMEDAD DEL AIRE";
+  private readonly HUMIDITY_SENSOR: string = "SENSOR DE HUMEDAD RELATIVA";
   temperatureHasData: Boolean = true;
   caudalHasData: Boolean = true;
   moistureHasData: Boolean = true;
@@ -58,7 +58,7 @@ export class DashboardComponent implements OnInit{
   ngOnInit() {
 
     // Get weather forecast
-    this.weatherForecastService.getWeatherData('Tumbes')
+    this.weatherForecastService.getWeatherData('Catacaos')
       .then(data => {
         this.WeatherData = data;
       })
@@ -243,9 +243,9 @@ export class DashboardComponent implements OnInit{
   getDevicesStatus(): void {
     this.deviceService.getAll().subscribe((devices: any) => {
       devices.forEach((device: any) => {
-        if (device.status == 'CONNECTED') {
+        if (device.status == 'ONLINE') {
           this.connectedDevices++;
-        } else if (device.status == 'DISCONNECTED') {
+        } else if (device.status == 'OFFLINE') {
           this.disconnectedDevices++;
         } else if (device.status == 'FAILED') {
           this.failedDevices++;
@@ -257,11 +257,11 @@ export class DashboardComponent implements OnInit{
           "value": this.failedDevices
         },
         {
-          "name": "DISCONNECTED",
+          "name": "OFFLINE",
           "value": this.disconnectedDevices
         },
         {
-          "name": "CONNECTED",
+          "name": "ONLINE",
           "value": this.connectedDevices
         }
       ]);

@@ -190,7 +190,10 @@
               <div class="font-extrabold text-xl" style="font-size: 18px;">Notifications</div>
 
             </div>
-            <div class="my-5 bg-slate-100	rounded-lg p-2">
+            <div *ngIf="notificationList.length === 0; else notificationEmpty">
+              <p class="py-3">There are no notifications available at the moment</p>
+            </div>
+            <ng-template #notificationEmpty class="my-5 bg-slate-100	rounded-lg p-2">
               <div class="my-2" *ngFor="let notification of notificationList">
                 <div class="text-4xl font-medium text-textparrafo" style="font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                   {{notification.body}}
@@ -199,7 +202,7 @@
                   {{ formatDate(notification.createdAt) }}
                 </div>
               </div>
-            </div>
+            </ng-template>
           </div>
         </div>
       </div>

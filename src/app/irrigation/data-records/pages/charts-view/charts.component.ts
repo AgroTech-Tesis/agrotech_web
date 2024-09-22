@@ -156,7 +156,7 @@ export class ChartsComponent implements OnInit{
     this.moistureChart = this.findSensorData(sensorData, 'SENSOR DE HUMEDAD');
     this.waterUsageChart = this.findSensorData(sensorData, 'SENSOR DE CAUDAL');
     this.temperatureChart = this.findSensorData(sensorData, 'SENSOR DE TEMPERATURA');
-    this.humidityChart = this.findSensorData(sensorData, 'SENSOR DE HUMEDAD DEL AIRE');
+    this.humidityChart = this.findSensorData(sensorData, 'SENSOR DE HUMEDAD RELATIVA');
   }
 
   private findSensorData(sensorData: any[], sensorName: string): any[] | undefined {

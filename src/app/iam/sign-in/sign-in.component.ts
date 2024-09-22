@@ -34,10 +34,11 @@ export class SignInComponent implements OnInit {
       this.account!.password = this.loginForm?.get("password")?.value;
       this.accountService.add(this.account!, this._snackBar).then((request) => {
         if(!request){
-          openSnackBar(this._snackBar, "Error al iniciar sesión, intente nuevamente", "mat-warn");
+          openSnackBar(this._snackBar, "Failed to Log In. Please, try again", "mat-warn");
         }
         this.isLogin.emit(true);
-        this.navigateTo('/control-panel');
+        localStorage.setItem("user", JSON.stringify(this.account.emailAddress));
+        this.navigateTo('/dashboard');
       });
     } else {
       this.showValidationErrors();
@@ -45,10 +46,10 @@ export class SignInComponent implements OnInit {
   }
   showValidationErrors() {
     if (this.loginForm!.controls['emailAddress'].invalid) {
-      openSnackBar(this._snackBar, "El nombre de usuario es requerido", "mat-warn");
+      openSnackBar(this._snackBar, "Incorrect Email", "mat-warn");
     }
     if (this.loginForm!.controls['password'].invalid) {
-      openSnackBar(this._snackBar, "La contraseña es requerida", "mat-warn");
+      openSnackBar(this._snackBar, "Incorrect Password", "mat-warn");
     }
   }
   navigateTo(route: string) {

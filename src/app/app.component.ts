@@ -67,4 +67,6 @@ export class AppComponent {
   onLogin(isLogin: boolean) {
     this.isLogin = isLogin;
   }
+
+  protected readonly localStorage = localStorage;
 }

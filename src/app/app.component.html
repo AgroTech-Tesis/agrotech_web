@@ -1,6 +1,6 @@
 <!--*ngIf="isLogin; else signInTemplate"-->
-<div class="text-seagreen h-screen flex flex-col">
-  <header-bar class="w-full"></header-bar>
+<div *ngIf="isLogin || localStorage.getItem('user'); else signInTemplate" class="text-seagreen h-screen flex flex-col">
+  <header-bar class="w-full" (isLoginChange)="isLogin = $event"></header-bar>
   <div class="flex flex-1">
     <div class="bg-gray-800 text-white flex flex-col items-center overflow-y-auto w-64 h-full">
       <side-navigation-bar></side-navigation-bar>
@@ -12,5 +12,5 @@
 </div>
 
 <ng-template #signInTemplate>
-<!--  <sign-in (isLogin)="onLogin($event)"></sign-in>-->
+  <sign-in (isLogin)="onLogin($event)"></sign-in>
 </ng-template>
