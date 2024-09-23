@@ -1,6 +1,6 @@
 [build]
-command = "ng build --prod"
-publish = "dist/agrotech/browser"
+command = "ng build --configuration production"
+publish = "dist/agrotech"
 
 [[redirects]]
 from = "/api/*"
