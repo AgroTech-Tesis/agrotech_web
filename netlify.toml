@@ -1,0 +1,15 @@
+[build]
+publish = "dist/agrotech_web"  # Cambia esto si tu directorio de build es diferente
+command = "ng build --prod"           # Cambia esto si tu comando de build es diferente
+
+[[redirects]]
+from = "/api/*"
+to = "http://agrotech.koreacentral.cloudapp.azure.com:8080/:splat"
+status = 200
+force = true
+
+[[redirects]]
+from = "/auth/*"
+to = "http://agrotech.koreacentral.cloudapp.azure.com:8081/:splat"
+status = 200
+force = true
