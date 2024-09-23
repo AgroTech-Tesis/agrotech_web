@@ -1,0 +1,14 @@
+[build]
+
+[[redirects]]
+from = "/api/*"
+to = "http://agrotech.koreacentral.cloudapp.azure.com:8080/:splat"
+status = 200
+force = true
+
+# Redirigir las peticiones que empiecen con "/auth" al backend en el puerto 8081
+[[redirects]]
+from = "/auth/*"
+to = "http://agrotech.koreacentral.cloudapp.azure.com:8081/:splat"
+status = 200
+force = true
