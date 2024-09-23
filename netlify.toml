@@ -1,6 +1,6 @@
 [build]
-publish = "dist/agrotech_web"  # Cambia esto si tu directorio de build es diferente
-command = "ng build --prod"           # Cambia esto si tu comando de build es diferente
+command = "ng build --prod"
+publish = "dist/agrotech/browser"
 
 [[redirects]]
 from = "/api/*"
