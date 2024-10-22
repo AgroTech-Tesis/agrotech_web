@@ -4,8 +4,8 @@ export const HOST = {
     // local: 'http://despliegue.westus3.cloudapp.azure.com'
     // local: 'http://agrotech.koreacentral.cloudapp.azure.com:8080/irrigation',
     // local2: 'http://agrotech.koreacentral.cloudapp.azure.com:8080/security',
-    local: 'http://agrotech.koreacentral.cloudapp.azure.com:8080',
-    local2: 'http://agrotech.koreacentral.cloudapp.azure.com:8081'
+    local: 'http://agrotechh.koreacentral.cloudapp.azure.com:8080',
+    local2: 'http://agrotechh.koreacentral.cloudapp.azure.com:8081'
 };
 
 export const hostSelected = {
