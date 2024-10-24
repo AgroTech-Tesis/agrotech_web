@@ -4,6 +4,8 @@ import { Account } from '../model/account';
 import { SecurityService, openSnackBar } from '../services/security.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { RiceCropsService } from '../../public/services/rice-crops.service';
+import { FarmerService } from '../../public/services/farmer.service';
 
 @Component({
   selector: 'sign-in',
@@ -20,6 +22,8 @@ export class SignInComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private accountService: SecurityService,
 		private _snackBar: MatSnackBar,
+    private riceCropsService: RiceCropsService,
+    private farmerService: FarmerService,
     private router: Router
   ) { }
   ngOnInit() {
@@ -36,13 +40,25 @@ export class SignInComponent implements OnInit {
         if(!request){
           openSnackBar(this._snackBar, "Failed to Log In. Please, try again", "mat-warn");
         }
-        this.isLogin.emit(true);
-        localStorage.setItem("user", JSON.stringify(this.account.emailAddress));
-        this.navigateTo('/dashboard');
+        this.agregateCredentials(request.id);
       });
     } else {
       this.showValidationErrors();
     }
+  }
+  agregateCredentials(accountId: number) {
+    this.farmerService.getFarmerByAccountId(accountId).subscribe((data: any) => {
+      if (data) {
+        localStorage.setItem("farmer", JSON.stringify(data.id));    
+        this.riceCropsService.getRiceCropByFarmerId(data.id).subscribe((response: any) => {
+          localStorage.setItem("riceCrops", JSON.stringify(response.id));
+        });
+        
+        this.isLogin.emit(true);
+        localStorage.setItem("user", JSON.stringify(this.account.emailAddress));
+        this.navigateTo('/dashboard');
+      }
+    }); 
   }
   showValidationErrors() {
     if (this.loginForm!.controls['emailAddress'].invalid) {

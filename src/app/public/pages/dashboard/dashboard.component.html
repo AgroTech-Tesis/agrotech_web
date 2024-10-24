@@ -166,7 +166,7 @@
                 <mat-icon  aria-hidden="false" aria-label="Example home icon" fontIcon="navigate_next"></mat-icon>
               </button>
             </div>
-            <ngx-charts-pie-chart
+            <ngx-charts-pie-chart *ngIf="devices.length == 0 ? false : true"
               [view]="view1"
               [scheme]="colorScheme1"
               [results]="single1"
@@ -176,6 +176,9 @@
               [legendPosition]="legendPosition1"
               [doughnut]="isDoughnut1">
             </ngx-charts-pie-chart>
+            <div *ngIf="devices.length != 0 ? false : true">
+              <p>No devices available</p>
+            </div>
           </div>
         </div>
       </div>

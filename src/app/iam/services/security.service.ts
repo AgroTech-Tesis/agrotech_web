@@ -14,13 +14,21 @@ export class SecurityService {
     constructor(private _httpClient: HttpClient) {
     }
 
-    add(account: Account, _snackBar: MatSnackBar):  Promise<any> {
-        return new Promise((resolve) => {
-            this.getSubscription = this._httpClient.post<any>(`${this.signInService}`, account).
-                subscribe({
-                    next: (data) => { resolve(data) },
-                    error: () => { openSnackBarError(_snackBar) }
-                })
+    add(account: Account, _snackBar: MatSnackBar): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.getSubscription = this._httpClient.post<any>(`${this.signInService}`, account).subscribe({
+                next: (data) => { 
+                    resolve(data); 
+                },
+                error: (err) => {
+                    if (err.status === 404) {
+                        openSnackBarError(_snackBar, err.error)
+                    } else {
+                        openSnackBar(_snackBar, "Failed to Log In. Please, try again", "mat-warn");
+                    }
+                    reject(err); // Rechaza la promesa en caso de error
+                }
+            });
         });
     }
     

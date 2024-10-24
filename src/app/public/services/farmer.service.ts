@@ -6,8 +6,8 @@ import {HOST} from "../../../../environments/enviroment.conts";
 @Injectable({
   providedIn: 'root'
 })
-export class NotificationsService {
-  dataRecordPath =   `${HOST.local}/notifications`
+export class FarmerService {
+  dataRecordPath = `${HOST.local2}/farmer`
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -24,12 +24,8 @@ export class NotificationsService {
     return throwError(() => new Error('Something happened with request, please try again later.'));
   }
 
-  getNotification(startDate: string, endDate: string): Observable<any> {
-    const params = new HttpParams()
-      .set('startDate', startDate)
-      .set('endDate', endDate);
-  
-    return this.http.get<any>(this.dataRecordPath, { params: params, ...this.httpOptions })
+  getFarmerByAccountId(accountId: number): Observable<any> {  
+    return this.http.get<any>(this.dataRecordPath + "/account/" + accountId)
       .pipe(
         retry(2),
         catchError(this.handleError)

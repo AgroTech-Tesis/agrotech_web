@@ -36,7 +36,8 @@ export class DevicesViewComponent implements OnInit{
   }
 
   getAllDevices(){
-    this.deviceService.getAll().subscribe((devices: any) =>{
+    var riceCropsId = JSON.parse(localStorage.getItem("riceCrops")!);
+    this.deviceService.getAllDeviceByRiceCropsId(riceCropsId).subscribe((devices: any) =>{
       this.deviceData = new MatTableDataSource(devices);
       console.log(this.deviceData.data)
     })

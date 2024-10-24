@@ -8,6 +8,8 @@ import {DevicesService} from "../../../devices/services/devices.service";
 import { Subject} from "rxjs";
 import {SensorDataRecordsService} from "../../../irrigation/data-records/services/sensor-data-records.service";
 import {NotificationsService} from "../../services/notifications.service";
+import { RiceCropsService } from '../../services/rice-crops.service';
+import { FarmerService } from '../../services/farmer.service';
 
 @Component({
   selector: 'dashboard',
@@ -42,6 +44,7 @@ export class DashboardComponent implements OnInit{
   moistureSensorData: any[] = []
   humiditySensorData: any[] = []
   notificationList: any[] = []
+  devices: any[] = []
   temperatureFilteredBy5LastHours: any = null;
   caudalFilteredBy5LastHours: any = null;
   humidityFilteredBy5LastHours: any = null;
@@ -65,9 +68,7 @@ export class DashboardComponent implements OnInit{
       .catch(error => {
         console.error('Error fetching weather data', error);
       });
-    this.notificationService.getNotification().subscribe((data: any) => {
-      this.notificationList = data;
-    });
+    this.onGetNotification();
     this.getDevicesStatus();
     this.devicesStatusSubject.subscribe(status => {
       this.single1 = status;
@@ -92,8 +93,36 @@ export class DashboardComponent implements OnInit{
       this.humidityFilteredBy5LastHours === null? this.humidityHasData = !this.humidityHasData: this.humidityHasData = true;
 
     })
-
-
+  }
+  onGetNotification() {
+    // Fecha de inicio del día actual (00:00:00)
+    const startDate = new Date();
+    startDate.setHours(0, 0, 0, 0); // Establece la hora al inicio del día
+  
+    // Fecha de fin del día actual (23:59:59)
+    const endDate = new Date();
+    endDate.setHours(23, 59, 59, 999); // Establece la hora al final del día
+  
+    // Función para convertir Date a LocalDateTime (YYYY-MM-DDTHH:mm:ss)
+    const formatLocalDateTime = (date: Date): string => {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0'); // Sumar 1 al mes porque es base 0
+      const day = String(date.getDate()).padStart(2, '0');
+      const hours = String(date.getHours()).padStart(2, '0');
+      const minutes = String(date.getMinutes()).padStart(2, '0');
+      const seconds = String(date.getSeconds()).padStart(2, '0');
+  
+      return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+    };
+  
+    // Convertir las fechas al formato LocalDateTime
+    const startDateLocalDateTime = formatLocalDateTime(startDate);
+    const endDateLocalDateTime = formatLocalDateTime(endDate);
+  
+    // Llamar al servicio con las fechas como parámetros
+    this.notificationService.getNotification(startDateLocalDateTime, endDateLocalDateTime).subscribe((data: any) => {
+      this.notificationList = data;
+    });
   }
   // BAR CHART
   formatDate(dateString: any) {
@@ -241,7 +270,9 @@ export class DashboardComponent implements OnInit{
   failedDevices = 0;
   deviceStatus: any
   getDevicesStatus(): void {
-    this.deviceService.getAll().subscribe((devices: any) => {
+    var riceCropsId = JSON.parse(localStorage.getItem("riceCrops")!);
+    this.deviceService.getAllDeviceByRiceCropsId(riceCropsId).subscribe((devices: any) => {
+      this.devices = devices;
       devices.forEach((device: any) => {
         if (device.status == 'ONLINE') {
           this.connectedDevices++;

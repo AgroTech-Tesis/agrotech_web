@@ -11,7 +11,7 @@ export class BaseService<T> {
     })
   }
 
-  constructor(private http: HttpClient, endpoint: string) {
+  constructor(protected http: HttpClient, endpoint: string) {
     this.endpoint = endpoint;
   }
 
