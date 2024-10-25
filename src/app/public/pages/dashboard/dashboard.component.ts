@@ -158,12 +158,15 @@ export class DashboardComponent implements OnInit{
     }
   }
   getDataRecordsAverageInTheLast5Hours(dataRecord: any[], typeSensor: string): any {
-    // Agrupar los datos por hora
     const groupedData: { [key: string]: any[] } = {};
 
     dataRecord.forEach((record: any) => {
       const date = new Date(record.name);
-      let hour = date.toLocaleString().substring(10, 12); // Agrupar por año-mes-día-hora
+      let hourString = date.getHours();
+      hourString = hourString > 12 ? hourString - 12 : hourString;
+      
+      let hour = hourString.toString();
+      
       hour = this.convertDate(hour, date)
 
       if (!groupedData[hour]) {
@@ -172,8 +175,6 @@ export class DashboardComponent implements OnInit{
 
       groupedData[hour].push(record);
     });
-
-    // Calcular el promedio de los valores dentro de cada grupo
     let sensorData: any[] = Object.keys(groupedData).map(hour => {
       const records = groupedData[hour];
       const averageValue = records.reduce((sum, record) => sum + record.value, 0) / records.length;
@@ -185,6 +186,7 @@ export class DashboardComponent implements OnInit{
       };
     });
 
+    console.log("sensorData", sensorData);
 
     // Filtrar las últimas 5 horas
     let now = new Date();
@@ -199,6 +201,7 @@ export class DashboardComponent implements OnInit{
         typeSensor: typeSensor
       };
     });
+    console.log("last5HoursData", last5HoursData);
 
     // Crear un objeto para una búsqueda rápida de los elementos del variableArray por el name
     const variableArrayMap = new Map(sensorData.map(item => [item.name, item]));
@@ -208,11 +211,14 @@ export class DashboardComponent implements OnInit{
         const matchingItem = variableArrayMap.get(item.name);
         return matchingItem ? matchingItem : item;
       });
+      console.log("mergedArray", mergedArray);
 
       let value = 0;
       mergedArray.map(data=>{
         0 !== data.value? value = data.value: 0;
       })
+      
+      console.log("value", value);
     if (value !== 0){
       return mergedArray
     }
