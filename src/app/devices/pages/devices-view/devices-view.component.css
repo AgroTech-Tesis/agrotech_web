@@ -1,0 +1,15 @@
+
+.image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    height: 200px;
+    width: 200px;
+    background-image: url('../../../../../assets/devices.png');
+    background-size: cover;
+  }
+.message{
+    text-align: center;
+    padding-top: 25px;
+}

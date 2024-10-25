@@ -1,5 +1,5 @@
 <div class="p-10">
-  <div class="justify-center w-full">
+  <div class="justify-center w-full" *ngIf="deviceData.data.length != 0">
     <div class="example-action-buttons">
       <button mat-button (click)="accordion && accordion.closeAll()">Collapse All</button>
     </div>
@@ -54,5 +54,12 @@
         </ng-template>
       </mat-expansion-panel>
     </mat-accordion>
+  </div>
+  <div *ngIf="deviceData.data.length == 0" class="w-full">
+    <div class="image">
+    </div>
+    <div class="message">
+      <h1>There are no devices to display</h1>
+    </div>
   </div>
 </div>
