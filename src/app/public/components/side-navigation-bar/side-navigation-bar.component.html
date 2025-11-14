@@ -1,20 +1,18 @@
 <div class="bg-gray-800 text-white w-64 flex-none">
   <div class="p-4">
-    <button [routerLink]="['/dashboard']" routerLinkActive="bg-seagreen text-white" class="my-4 h-12 w-full flex items-center text-seagreen bg-primary rounded-r-lg hover:bg-seagreen hover:text-white cursor-pointer">
-      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home" class="mr-4"></mat-icon>
-      <span class="font-semibold">Dashboard</span>
-    </button>
-    <button [routerLink]="['/devices']" routerLinkActive="bg-seagreen text-white" class="my-4 h-12 w-full flex items-center text-seagreen bg-primary rounded-r-lg hover:bg-seagreen hover:text-white cursor-pointer">
-      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="phone_iphone" class="mr-4"></mat-icon>
-      <span class="font-semibold">Devices</span>
-    </button>
-    <button [routerLink]="['/historical-data']" routerLinkActive="bg-seagreen text-white" class="my-4 h-12 w-full flex items-center text-seagreen bg-primary rounded-r-lg hover:bg-seagreen hover:text-white cursor-pointer">
-      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="bar_chart" class="mr-4"></mat-icon>
-      <span class="font-semibold">Charts</span>
-    </button>
-<!--    <button [routerLink]="['/settings']" routerLinkActive="bg-seagreen text-white" class="my-4 h-12 w-full flex items-center text-seagreen bg-primary rounded-r-lg hover:bg-seagreen hover:text-white cursor-pointer">-->
-<!--      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="settings" class="mr-4"></mat-icon>-->
-<!--      <span class="font-semibold">Settings</span>-->
-<!--    </button>-->
+    <ul nz-menu nzMode="inline" class="bg-gray-800 border-0">
+      <li nz-menu-item [routerLink]="['/dashboard']" routerLinkActive="bg-seagreen" class="my-2 h-12 rounded-lg hover:bg-seagreen">
+        <span nz-icon nzType="home" nzTheme="outline" class="mr-2"></span>
+        <span class="font-semibold">Dashboard</span>
+      </li>
+      <li nz-menu-item [routerLink]="['/devices']" routerLinkActive="bg-seagreen" class="my-2 h-12 rounded-lg hover:bg-seagreen">
+        <span nz-icon nzType="mobile" nzTheme="outline" class="mr-2"></span>
+        <span class="font-semibold">Devices</span>
+      </li>
+      <li nz-menu-item [routerLink]="['/historical-data']" routerLinkActive="bg-seagreen" class="my-2 h-12 rounded-lg hover:bg-seagreen">
+        <span nz-icon nzType="bar-chart" nzTheme="outline" class="mr-2"></span>
+        <span class="font-semibold">Charts</span>
+      </li>
+    </ul>
   </div>
 </div>

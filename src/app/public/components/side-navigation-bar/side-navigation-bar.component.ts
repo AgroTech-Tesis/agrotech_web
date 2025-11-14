@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
-import {MatIcon} from "@angular/material/icon";
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
 import {RouterLink, RouterLinkActive} from "@angular/router";
 
 @Component({
   selector: 'side-navigation-bar',
   standalone: true,
   imports: [
-    MatIcon,
+    NzIconModule,
+    NzMenuModule,
     RouterLink,
     RouterLinkActive
   ],

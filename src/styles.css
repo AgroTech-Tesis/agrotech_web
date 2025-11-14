@@ -1,3 +1,5 @@
+@import "ng-zorro-antd/ng-zorro-antd.min.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -18,4 +20,12 @@ body {
 ::before,
 ::after {
     border-width: 0;
+}
+
+/* Customize Ng-Zorro theme to match your colors */
+:root {
+    --ant-primary-color: #274c77;
+    --ant-success-color: #297739;
+    --ant-error-color: #9b4343;
+    --ant-warning-color: #ff7a00;
 }

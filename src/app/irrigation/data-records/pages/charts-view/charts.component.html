@@ -1,28 +1,18 @@
 <div class="p-10">
-  <mat-button-toggle-group
-    name="options"
-    [(ngModel)]="selectedOption"
-    aria-label="Option selection"
-    appearance="legacy"
-    (change)="this.getFilteredSensorData()">
-    <mat-button-toggle *ngFor="let zone of zones" [value]="zone.name">{{ zone.name.toUpperCase() }}</mat-button-toggle>
-  </mat-button-toggle-group>
+  <div class="mb-6">
+    <nz-radio-group [(ngModel)]="selectedOption" (ngModelChange)="this.getFilteredSensorData()" nzButtonStyle="solid">
+      <label *ngFor="let zone of zones" nz-radio-button [nzValue]="zone.name">{{ zone.name.toUpperCase() }}</label>
+    </nz-radio-group>
+  </div>
 
-  <mat-button-toggle-group
-    name="options"
-    [(ngModel)]="dateSelectedOption"
-    aria-label="Option selection"
-    appearance="legacy"
-    (change)="this.getFilteredSensorData()">
-    <mat-button-toggle *ngFor="let date of dateFilter; let index = index" [value]="date">{{ date.toUpperCase() }}</mat-button-toggle>
-  </mat-button-toggle-group>
-
-<!--  <button mat-button> Aplicar Filtro</button>-->
-
+  <div class="mb-6">
+    <nz-radio-group [(ngModel)]="dateSelectedOption" (ngModelChange)="this.getFilteredSensorData()" nzButtonStyle="solid">
+      <label *ngFor="let date of dateFilter" nz-radio-button [nzValue]="date">{{ date.toUpperCase() }}</label>
+    </nz-radio-group>
+  </div>
 
   <div class="grid grid-cols-2 gap-6">
-    <div>
-      <h2 class="mb-4">Water Consumption</h2>
+    <nz-card nzTitle="Water Consumption" class="shadow-lg">
       <div *ngIf="waterUsageChart[0]">
         <ngx-charts-line-chart
           [view]="view"
@@ -41,9 +31,9 @@
       <div *ngIf="!waterUsageChart[0]">
         <p>There is not enough data available to generate the chart</p>
       </div>
-    </div>
-    <div>
-      <h2 class="mb-4">Soil Moisture</h2>
+    </nz-card>
+
+    <nz-card nzTitle="Soil Moisture" class="shadow-lg">
       <div *ngIf="moistureChart[0]">
         <ngx-charts-line-chart
           [view]="view"
@@ -62,9 +52,9 @@
       <div *ngIf="!moistureChart[0]">
         <p>There is not enough data available to generate the chart</p>
       </div>
-    </div>
-    <div>
-      <h2 class="mb-4">Air Humidity</h2>
+    </nz-card>
+
+    <nz-card nzTitle="Air Humidity" class="shadow-lg">
       <div *ngIf="humidityChart[0]">
         <ngx-charts-line-chart
           [view]="view"
@@ -83,9 +73,9 @@
       <div *ngIf="!humidityChart[0]">
         <p>There is not enough data available to generate the chart</p>
       </div>
-    </div>
-    <div>
-      <h2 class="mb-4">Air Temperature</h2>
+    </nz-card>
+
+    <nz-card nzTitle="Air Temperature" class="shadow-lg">
       <div *ngIf="temperatureChart[0]">
         <ngx-charts-line-chart
           [view]="view"
@@ -104,7 +94,6 @@
       <div *ngIf="!temperatureChart[0]">
         <p>There is not enough data available to generate the chart</p>
       </div>
-
-    </div>
+    </nz-card>
   </div>
 </div>

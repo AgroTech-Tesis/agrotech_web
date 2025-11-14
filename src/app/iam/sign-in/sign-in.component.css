@@ -24,37 +24,6 @@
   margin-bottom: 20px;
 }
 
-.p-field {
-  margin-bottom: 20px;
-}
-
-.p-field label {
-  width: 100%;
-  font-weight: 500;
-}
-
-.p-field input {
-  border: 1px solid #887E7E;
-}
-
-.login-box button {
-  width: 100%;
-  height: 50px;
-  text-align: center;
-  background: #297739;
-  border: none;
-  color: #fff;
-  border-radius: 8px;
-  font-size: 18px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.login-box button:hover {
-  background: #215f2e;
-  transition: .8s;
-}
-
 .logo-image {
   width: 100px;
   height: 150px;
@@ -62,4 +31,33 @@
   display: block;
   background-image: url('../../../../assets/logo.png');
   background-size: cover;
+}
+
+/* Ng-Zorro custom styles */
+::ng-deep .ant-form-item {
+  margin-bottom: 20px;
+}
+
+::ng-deep .ant-form-item-label > label {
+  font-weight: 500;
+}
+
+::ng-deep .ant-input {
+  border: 1px solid #887E7E;
+  padding: 6px 10px;
+  border-radius: 4px;
+}
+
+::ng-deep .ant-btn-primary {
+  height: 40px;
+  background: #297739;
+  border-color: #297739;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 4px;
+}
+
+::ng-deep .ant-btn-primary:hover {
+  background: #215f2e;
+  border-color: #215f2e;
 }

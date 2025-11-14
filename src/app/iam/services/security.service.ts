@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Observable, Subscription} from "rxjs";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { HOST, hostSelected } from "../../../../environments/enviroment.conts";
 import { Account } from "../model/account";
 @Injectable({
@@ -14,49 +14,22 @@ export class SecurityService {
     constructor(private _httpClient: HttpClient) {
     }
 
-    add(account: Account, _snackBar: MatSnackBar): Promise<any> {
+    add(account: Account, message: NzMessageService): Promise<any> {
         return new Promise((resolve, reject) => {
             this.getSubscription = this._httpClient.post<any>(`${this.signInService}`, account).subscribe({
-                next: (data) => { 
-                    resolve(data); 
+                next: (data) => {
+                    resolve(data);
                 },
                 error: (err) => {
                     if (err.status === 404) {
-                        openSnackBarError(_snackBar, err.error)
+                        message.error(err.error || 'Error interno al procesar la solicitud');
                     } else {
-                        openSnackBar(_snackBar, "Failed to Log In. Please, try again", "mat-warn");
+                        message.error("Failed to Log In. Please, try again");
                     }
                     reject(err); // Rechaza la promesa en caso de error
                 }
             });
         });
     }
-    
-}
-export const openSnackBarError = function (
-    _snackBar: MatSnackBar,
-    _message: string = 'Error interno al procesar la solicitud'
-) {
-    openSnackBar(
-        _snackBar,
-        _message,
-        'mat-warn'
-    );
 
-}
-export const openSnackBar = function (
-    _snackBar: MatSnackBar,
-    message: string,
-    type: string = 'mat-primary',
-    position: any = 'center',
-    duration: number = 6000
-) {
-    let arrayClass = type.split(' ');
-    arrayClass.push('mat-toolbar');
-    _snackBar.open(message, 'X', {
-        horizontalPosition: position,
-        verticalPosition: 'bottom',
-        duration: duration,
-        panelClass: arrayClass,
-    });
 }

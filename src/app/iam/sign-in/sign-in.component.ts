@@ -1,8 +1,12 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Account } from '../model/account';
-import { SecurityService, openSnackBar } from '../services/security.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { SecurityService } from '../services/security.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { Router } from '@angular/router';
 import { RiceCropsService } from '../../public/services/rice-crops.service';
 import { FarmerService } from '../../public/services/farmer.service';
@@ -10,7 +14,7 @@ import { FarmerService } from '../../public/services/farmer.service';
 @Component({
   selector: 'sign-in',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NzFormModule, NzInputModule, NzButtonModule, NzIconModule],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.css'
 })
@@ -19,9 +23,10 @@ export class SignInComponent implements OnInit {
   title = 'Agrotech';
   account: Account = { emailAddress: "", password: "" };
   loginForm?: FormGroup;
+  passwordVisible = false;
   constructor(private formBuilder: FormBuilder,
     private accountService: SecurityService,
-		private _snackBar: MatSnackBar,
+		private message: NzMessageService,
     private riceCropsService: RiceCropsService,
     private farmerService: FarmerService,
     private router: Router
@@ -36,9 +41,9 @@ export class SignInComponent implements OnInit {
     if (this.loginForm!.valid) {
       this.account!.emailAddress = this.loginForm?.get("emailAddress")?.value;
       this.account!.password = this.loginForm?.get("password")?.value;
-      this.accountService.add(this.account!, this._snackBar).then((request) => {
+      this.accountService.add(this.account!, this.message).then((request) => {
         if(!request){
-          openSnackBar(this._snackBar, "Failed to Log In. Please, try again", "mat-warn");
+          this.message.error("Failed to Log In. Please, try again");
         }
         this.agregateCredentials(request.id);
       });
@@ -49,23 +54,23 @@ export class SignInComponent implements OnInit {
   agregateCredentials(accountId: number) {
     this.farmerService.getFarmerByAccountId(accountId).subscribe((data: any) => {
       if (data) {
-        localStorage.setItem("farmer", JSON.stringify(data.id));    
+        localStorage.setItem("farmer", JSON.stringify(data.id));
         this.riceCropsService.getRiceCropByFarmerId(data.id).subscribe((response: any) => {
           localStorage.setItem("riceCrops", JSON.stringify(response.id));
         });
-        
+
         this.isLogin.emit(true);
         localStorage.setItem("user", JSON.stringify(this.account.emailAddress));
         this.navigateTo('/dashboard');
       }
-    }); 
+    });
   }
   showValidationErrors() {
     if (this.loginForm!.controls['emailAddress'].invalid) {
-      openSnackBar(this._snackBar, "Incorrect Email", "mat-warn");
+      this.message.warning("Incorrect Email");
     }
     if (this.loginForm!.controls['password'].invalid) {
-      openSnackBar(this._snackBar, "Incorrect Password", "mat-warn");
+      this.message.warning("Incorrect Password");
     }
   }
   navigateTo(route: string) {

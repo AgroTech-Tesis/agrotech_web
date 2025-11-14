@@ -1,33 +1,29 @@
 import {Component, OnInit} from '@angular/core';
-import {MatIconModule} from '@angular/material/icon';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatChipEditedEvent, MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
-
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatInputModule} from '@angular/material/input';
-import {provideNativeDateAdapter} from '@angular/material/core';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
 import {FormGroup, FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Color, NgxChartsModule, ScaleType} from "@swimlane/ngx-charts";
 import {ArduinoIotService} from "../../services/arduino-iot";
-import {MatButtonToggle, MatButtonToggleGroup} from "@angular/material/button-toggle";
 import {ZonesService} from "../../../../devices/services/zones.service";
-import {MatButton} from "@angular/material/button";
 import {Subject} from "rxjs";
 import {SensorDataRecordsService} from "../../services/sensor-data-records.service";
+import {NgForOf, NgIf} from "@angular/common";
 
 
 @Component({
   selector: 'charts-view',
   standalone: true,
-  providers: [provideNativeDateAdapter()],
-  imports: [MatFormFieldModule,
-    MatIconModule,
-    MatChipsModule,
-    MatDatepickerModule,
-    MatInputModule,
+  imports: [NzIconModule,
+    NzRadioModule,
+    NzButtonModule,
+    NzCardModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxChartsModule, MatButtonToggleGroup, MatButtonToggle, MatButton],
+    NgxChartsModule,
+    NgForOf,
+    NgIf],
   templateUrl: './charts.component.html',
   styleUrl: './charts.component.css'
 })

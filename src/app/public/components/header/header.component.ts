@@ -1,6 +1,6 @@
-import {MatIcon} from "@angular/material/icon";
 import {Component, EventEmitter, Output, Pipe, PipeTransform} from "@angular/core";
-import {DatePipe, formatDate, NgOptimizedImage} from "@angular/common";
+import {formatDate} from "@angular/common";
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import {TranslateService} from "@ngx-translate/core";
 import {Router} from "@angular/router";
 
@@ -8,8 +8,7 @@ import {Router} from "@angular/router";
   selector: 'header-bar',
   standalone: true,
   imports: [
-    MatIcon,
-    NgOptimizedImage
+    NzIconModule
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'

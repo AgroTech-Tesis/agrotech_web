@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {NgIf} from "@angular/common";
-import {MatIconModule} from '@angular/material/icon';
+import {NgForOf, NgIf} from "@angular/common";
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzListModule } from 'ng-zorro-antd/list';
 import {WeatherForecastsService} from "../../services/weather-forecasts.service";
 import {RouterLink, RouterOutlet} from "@angular/router";
 import {LegendPosition, NgxChartsModule, ScaleType} from "@swimlane/ngx-charts";
@@ -16,9 +19,12 @@ import { FarmerService } from '../../services/farmer.service';
   standalone: true,
   imports: [
     NgIf,
-    MatIconModule,
+    NgForOf,
+    NzIconModule,
+    NzCardModule,
+    NzButtonModule,
+    NzListModule,
     RouterLink,
-    RouterOutlet,
     NgxChartsModule
   ],
   templateUrl: './dashboard.component.html',
@@ -98,11 +104,11 @@ export class DashboardComponent implements OnInit{
     // Fecha de inicio del día actual (00:00:00)
     const startDate = new Date();
     startDate.setHours(0, 0, 0, 0); // Establece la hora al inicio del día
-  
+
     // Fecha de fin del día actual (23:59:59)
     const endDate = new Date();
     endDate.setHours(23, 59, 59, 999); // Establece la hora al final del día
-  
+
     // Función para convertir Date a LocalDateTime (YYYY-MM-DDTHH:mm:ss)
     const formatLocalDateTime = (date: Date): string => {
       const year = date.getFullYear();
@@ -111,14 +117,14 @@ export class DashboardComponent implements OnInit{
       const hours = String(date.getHours()).padStart(2, '0');
       const minutes = String(date.getMinutes()).padStart(2, '0');
       const seconds = String(date.getSeconds()).padStart(2, '0');
-  
+
       return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
     };
-  
+
     // Convertir las fechas al formato LocalDateTime
     const startDateLocalDateTime = formatLocalDateTime(startDate);
     const endDateLocalDateTime = formatLocalDateTime(endDate);
-  
+
     // Llamar al servicio con las fechas como parámetros
     this.notificationService.getNotification(startDateLocalDateTime, endDateLocalDateTime).subscribe((data: any) => {
       this.notificationList = data;
@@ -164,9 +170,9 @@ export class DashboardComponent implements OnInit{
       const date = new Date(record.name);
       let hourString = date.getHours();
       hourString = hourString > 12 ? hourString - 12 : hourString;
-      
+
       let hour = hourString.toString();
-      
+
       hour = this.convertDate(hour, date)
 
       if (!groupedData[hour]) {
@@ -217,7 +223,7 @@ export class DashboardComponent implements OnInit{
       mergedArray.map(data=>{
         0 !== data.value? value = data.value: 0;
       })
-      
+
       console.log("value", value);
     if (value !== 0){
       return mergedArray

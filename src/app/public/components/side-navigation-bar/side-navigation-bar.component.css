@@ -1,0 +1,26 @@
+::ng-deep .ant-menu-inline {
+  background-color: #1f2937 !important;
+  border: none !important;
+}
+
+::ng-deep .ant-menu-item {
+  color: #297739 !important;
+  margin: 8px 0 !important;
+  height: 48px !important;
+  line-height: 48px !important;
+}
+
+::ng-deep .ant-menu-item:hover {
+  background-color: #297739 !important;
+  color: white !important;
+}
+
+::ng-deep .ant-menu-item-selected {
+  background-color: #297739 !important;
+  color: white !important;
+}
+
+::ng-deep .ant-menu-item-active {
+  background-color: #297739 !important;
+  color: white !important;
+}

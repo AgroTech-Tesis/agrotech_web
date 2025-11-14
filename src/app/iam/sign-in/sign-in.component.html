@@ -2,20 +2,34 @@
   <div class="login-box p-shadow-10">
     <div class="logo-image"></div>
     <h2 class="login-header">Sign In</h2>
-    <form [formGroup]="loginForm!" (ngSubmit)="onSubmit()">
-      <div class="p-fluid">
-        <div class="p-field">
-          <label>Email Address</label>
-          <input class="w-full pt-[12px] pb-[12px] mt-5 rounded-lg" type="text"
-          formControlName="emailAddress" id="emailAddress" pInputText>
-        </div>
-        <div class="p-field">
-          <label>Password</label>
-          <input class="w-full pt-[12px] pb-[12px] mt-5 rounded-lg" type="password"
-          formControlName="password" id="password" pInputText>
-        </div>
-      </div>
-      <button [disabled]="loginForm!.invalid" >Enter</button>
+    <form nz-form [formGroup]="loginForm!" (ngSubmit)="onSubmit()">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="24">Email Address</nz-form-label>
+        <nz-form-control [nzSpan]="24">
+          <nz-input-group [nzPrefix]="emailPrefix">
+            <input nz-input formControlName="emailAddress" type="email" placeholder="Enter your email" />
+          </nz-input-group>
+          <ng-template #emailPrefix>
+            <span nz-icon nzType="mail" nzTheme="outline"></span>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="24">Password</nz-form-label>
+        <nz-form-control [nzSpan]="24">
+          <nz-input-group [nzSuffix]="suffixTemplate">
+            <input nz-input formControlName="password" [type]="passwordVisible ? 'text' : 'password'" placeholder="Enter your password" />
+          </nz-input-group>
+          <ng-template #suffixTemplate>
+            <span nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible" style="cursor: pointer;"></span>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control [nzSpan]="24">
+          <button nz-button nzType="primary" nzBlock [disabled]="loginForm!.invalid" class="mt-4">Enter</button>
+        </nz-form-control>
+      </nz-form-item>
     </form>
   </div>
 </div>
